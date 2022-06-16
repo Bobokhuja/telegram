@@ -14,6 +14,7 @@ function Layout({children}: ILayout) {
     <div className={classes.Layout}>
       <div className={classes.Left}>
         <Menu />
+
       </div>
       <Outlet/>
     </div>

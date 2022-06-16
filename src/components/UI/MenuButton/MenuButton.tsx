@@ -1,16 +1,18 @@
-import React, {DetailedHTMLProps, ImgHTMLAttributes} from 'react'
+import React, {DetailedHTMLProps, ImgHTMLAttributes, ReactNode} from 'react'
 import classes from './MenuButton.module.scss'
 
 interface IMenuButton {
-  icon: React.ImgHTMLAttributes<T>.src?: string | undefined
   text?: string
+  onChange?: React.ChangeEventHandler
+  children: ReactNode
 }
 
-function MenuButton({icon, text}: IMenuButton) {
+function MenuButton({text, children}: IMenuButton) {
 
   return (
-    <button>
-      <img src={icon} alt={text ? text : ''} />
+    <button className={classes.MenuButton}>
+      {children}
+      {text && <span className={classes.Text}>{text}</span>}
     </button>
   )
 }
