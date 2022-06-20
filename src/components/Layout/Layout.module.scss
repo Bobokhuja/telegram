@@ -1,10 +1,25 @@
 .Layout {
   height: 100vh;
-  background: rgb(49,43,150);
-  background: linear-gradient(90deg, rgba(49,43,150,1) 0%, rgba(52,52,166,1) 35%, rgba(0,212,255,1) 100%);
+  //background: rgb(49,43,150);
+  //background: linear-gradient(90deg, rgba(49,43,150,1) 0%, rgba(52,52,166,1) 35%, rgba(0,212,255,1) 100%);
   overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
 }
 
 .Left {
   height: 100%;
+  display: flex;
+  justify-content: start;
+}
+
+.ChatAndSearch {
+  background: #fff;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Right {
+  flex-grow: 1;
 }

@@ -1,0 +1,90 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ChatItem {
+  width: 100%;
+  height: 80px;
+  //overflow: hidden;
+  display: flex;
+  justify-content: start;
+  box-sizing: border-box;
+  padding: 10px;
+  cursor: pointer;
+  transition: all, .3s;
+
+  &:hover {
+    background: rgba(0, 0, 0, .07);
+  }
+}
+
+.Active {
+  background: #419fd9;
+
+  &:hover {
+    background: #419fd9;
+  }
+
+  .ChatRight,
+  .ChatCenter,
+  .Text {
+    color: #fff;
+    font-weight: 300;
+  }
+
+  .Text {
+    color: #fff;
+    .sender {
+      color: #fff;
+    }
+  }
+}
+
+.ChatLeft {
+  width: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.ChatImg {
+  max-width: 100%;
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.ChatCenter {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 4px 0;
+}
+
+.Title {
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.Text {
+  margin: 0;
+  color: #777;
+
+  .sender {
+    color: #44c0f0;
+  }
+}
+
+.ChatRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+
+  p {
+    margin: 0;
+  }
+}

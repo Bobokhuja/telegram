@@ -1,0 +1,23 @@
+.SearchInput {
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+
+  input {
+    width: 100%;
+    border: 2px solid transparent;
+    background: #dfdfdf;
+    height: 40px;
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: 3px;
+
+    &:active,
+    &:focus {
+      border-color: #54c3f3;
+      background: #fff;
+    }
+  }
+}

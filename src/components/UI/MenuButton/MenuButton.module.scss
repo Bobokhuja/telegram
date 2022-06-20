@@ -1,11 +1,16 @@
 .MenuButton {
   display: inline-block;
-  background: none;
   box-shadow: none;
   border: none;
   padding: 15px 0;
   width: 100%;
   cursor: pointer;
+  background: #293a4c;
+  transition: all, .3s;
+
+  &:active {
+    background: darken(#293a4c, 5%);
+  }
 }
 
 .Text {
@@ -13,5 +18,7 @@
   color: #8393a3;
   padding: 0 10px;
   box-sizing: border-box;
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
 }
