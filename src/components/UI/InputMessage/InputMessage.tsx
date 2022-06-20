@@ -4,13 +4,17 @@ import classes from './InputMessage.module.scss'
 interface IInputMessage {
   value: string
   onChange: ChangeEventHandler
+  customClass?: string
 }
 
-function InputMessage({value, onChange}: IInputMessage) {
+function InputMessage({value, onChange, customClass}: IInputMessage) {
   const htmlFor: string = Math.random().toString()
 
+  const cls = [classes.InputMessage]
+  if (customClass) cls.push(customClass)
+
   return (
-    <div className={classes.InputMessage}>
+    <div className={cls.join(' ')}>
       <input
         type="text"
         value={value}

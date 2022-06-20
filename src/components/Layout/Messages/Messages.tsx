@@ -3,6 +3,7 @@ import classes from './Messages.module.scss'
 import HeaderMessages from './HeaderMessages/HeaderMessages'
 import {useParams} from 'react-router-dom'
 import InputChat from './InputChat/InputChat'
+import MessageContainer from './MessageContainer/MessageContainer'
 
 function Messages() {
   // const [isExistChat, setIsExistChat] = useState<boolean>(true)
@@ -23,7 +24,7 @@ function Messages() {
                 title="ReactJS"
                 chatinfo="online"
               />
-
+              <MessageContainer />
               <InputChat />
             </>
           )

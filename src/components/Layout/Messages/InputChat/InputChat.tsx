@@ -1,6 +1,7 @@
 import React, {ChangeEvent, ChangeEventHandler, useState} from 'react'
 import classes from './InputChat.module.scss'
-import InputMessage from './InputMessage/InputMessage'
+import InputMessage from '../../../UI/InputMessage/InputMessage'
+import InputSelectFile from '../../../UI/InputSelectFile/InputSelectFile'
 
 interface IInputChat {
 
@@ -15,12 +16,24 @@ function InputChat({}: IInputChat) {
 
   return (
     <div className={classes.InputChat}>
+      <InputSelectFile
+
+      />
       <InputMessage
         value={textMessage}
         onChange={onChangeInput}
+        customClass={classes.InputText}
       />
-      {/*<input type="file" />*/}
-      {/*<input type="text" />*/}
+
+      {
+        textMessage && (
+          <button className={classes.Send}>
+            <span className="material-symbols-outlined">send</span>
+          </button>
+        )
+      }
+
+
 
     </div>
   )

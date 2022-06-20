@@ -32,7 +32,7 @@ function Layout({children}: ILayout) {
         </div>
 
       </div>
-      <div className={classes.Right} style={{background: `url('${bg}')`}}>
+      <div className={classes.Right} style={{backgroundImage: `url('${bg}')`}}>
         <Messages />
       </div>
     </div>

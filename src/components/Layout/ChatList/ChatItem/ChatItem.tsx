@@ -36,7 +36,7 @@ function ChatItem({title, text, date, sender, onClick, address}: IChatItem) {
         </div>
         <div className={classes.ChatRight}>
           <p className={classes.Date}>{date}</p>
-          <span className="material-symbols-outlined">push_pin</span>
+          <span className={`${classes.pin} material-symbols-outlined`}>push_pin</span>
         </div>
       </div>
     </Link>

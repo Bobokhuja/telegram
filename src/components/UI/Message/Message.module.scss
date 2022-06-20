@@ -1,0 +1,54 @@
+.Message {
+  display: inline-flex;
+  align-items: flex-end;
+  width: 100%;
+  margin: 10px 0;
+
+  p {
+    margin: 0;
+    display: inline;
+    padding: 7px 15px;
+    max-width: 40%;
+    word-break: break-all;
+    font-size: 14px;
+  }
+}
+
+.YourMessage {
+  p {
+    background: #eefdde;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  .MessageTailFilled {
+    display: block;
+    margin-bottom: -1px;
+  }
+}
+
+.HisMessage {
+  align-items: flex-end;
+  justify-content: flex-end;
+  p {
+    background: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    //flex-grow: 1;
+    margin-left: auto;
+  }
+
+  .MessageTailFilled {
+    transform: scaleX(-1);
+    order: 1;
+  }
+}
+
+.MessageTailFilled {
+  display: block;
+  margin-bottom: -1px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}

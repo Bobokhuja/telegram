@@ -1,0 +1,23 @@
+.InputSelectFile {
+  position: relative;
+  width: 25px;
+  height: 30px;
+}
+
+.clip {
+  font-size: 28px;
+  transform: rotate(45deg);
+  display: block;
+  color: #888;
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.InputFile {
+  opacity: 0;
+  width: 25px;
+  height: 30px;
+  background: #000;
+  position: absolute;
+}
