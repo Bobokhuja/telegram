@@ -17,7 +17,7 @@ const dataChats = [
     id: 2,
     title: 'Книги для программистов',
     text: 'Hello World! this is a public',
-    sender: '',
+    // sender: '',
     date: 'Wed',
     isActive: false,
     address: 'booksofprogrammer'
@@ -44,6 +44,7 @@ function ChatList() {
                 date={chat.date}
                 onClick={onClickHandler}
                 address={chat.address}
+                sender={chat.sender}
               />
             )
           )

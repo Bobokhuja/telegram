@@ -1,5 +1,4 @@
 import React, {ChangeEvent, ChangeEventHandler, useState} from 'react'
-import {Outlet} from 'react-router-dom'
 import classes from './Layout.module.scss'
 import Menu from './Menu/Menu'
 import ChatList from './ChatList/ChatList'

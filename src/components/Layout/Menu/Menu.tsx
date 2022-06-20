@@ -32,7 +32,7 @@ function Menu() {
             </MenuButton>
           </li>
           <li>
-            <MenuButton text="New messages">
+            <MenuButton text="New">
               <span className={cls.join(' ')}>chat</span>
             </MenuButton>
           </li>

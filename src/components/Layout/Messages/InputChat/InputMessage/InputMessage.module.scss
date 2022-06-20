@@ -1,0 +1,65 @@
+.InputMessage {
+  position: relative;
+  height: 30px;
+  box-sizing: border-box;
+
+  label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    z-index: 2;
+    font-size: 13px;
+    color: #aaa;
+    animation-duration: .2s;
+    pointer-events: none;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  input {
+    border: none;
+    padding: 2px 5px;
+    outline: none;
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    top: 0;
+    box-sizing: border-box;
+    left: 0;
+    height: 100%;
+
+    &:not(&[value=""]) ~ label {
+      animation-name: fadeOut;
+      animation-duration: .2s;
+      animation-fill-mode: forwards;
+    }
+
+    &[value=""] ~ label {
+      animation-name: fadeIn;
+      animation-duration: .2s;
+      animation-fill-mode: forwards;
+    }
+
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    left: 10px;
+    opacity: 1;
+  }
+  to {
+    left: 50px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    left: 50px;
+    opacity: 0;
+  }
+  to {
+    left: 10px;
+    opacity: 1;
+  }
+}

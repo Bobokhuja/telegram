@@ -1,0 +1,22 @@
+.HeaderMessages {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 8px 25px;
+  height: 65px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ccc;
+}
+
+.ChatName {
+  margin: 0 0 5px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.ChatInfo {
+  margin: 5px 0 0;
+  color: #707579;
+  font-size: 13px;
+}

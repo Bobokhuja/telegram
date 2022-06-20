@@ -1,18 +1,28 @@
 .SearchInput {
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   box-sizing: border-box;
+  height: 65px;
+  display: flex;
+  align-items: center;
 
   input {
     width: 100%;
     border: 2px solid transparent;
-    background: #dfdfdf;
-    height: 40px;
-    font-size: 16px;
+    background: #efeded;
+    height: 35px;
+    font-size: 14px;
     padding: 10px;
     box-sizing: border-box;
+    font-weight: 400;
     outline: none;
     border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+
+    &::placeholder {
+      color: #888;
+      font-weight: 300;
+    }
 
     &:active,
     &:focus {
