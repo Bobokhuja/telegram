@@ -5,41 +5,43 @@ import {useParams} from 'react-router-dom'
 import InputChat from './InputChat/InputChat'
 import MessageContainer from './MessageContainer/MessageContainer'
 import chatList from '../../../data/chatList'
-import messages, {IMessages} from '../../../data/messages'
+import messages, {IMessage} from '../../../data/messages'
 import {UserContext} from '../Layout'
 import {ChatContext} from '../Layout'
+import checkChat from '../../../utils/checkChat'
 
 type IMessagesComponent = {
-  // title: string
-  chatMessages: IMessages[]
+  chatMessages: IMessage[]
   setChatMessages: any
-  // textMessage: string
-  // onChangeInput: any
 }
 
 function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
+  //Hook
+  //States
   const [title, setTitle] = useState<string>('')
-
   const [textMessage, setTextMessage] = useState<string>('')
 
-  const onChangeInput: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setTextMessage(event.target.value)
-  }
+  //Other Hooks
   const divRef = useRef(null)
-
   const {chat} = useParams()
   const user: any = useContext(UserContext)
   const currentChat: any = useContext(ChatContext)
+
   useEffect(() => {
-    if (chat) setTitle(currentChat.name)
+    if (checkChat(chat!)) setTitle(currentChat.name)
   }, [chat])
 
   useEffect(() => {
-    if (chat) {
+    if (checkChat(chat!)) {
       const currentMessages = messages.getMessage(currentChat!.id)
       setChatMessages(currentMessages)
     }
   }, [chat])
+
+  // Handlers
+  const onChangeInput: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setTextMessage(event.target.value)
+  }
 
   const onSendMessageHandler: any = (text: string) => () => {
     if (!textMessage.trim()) return false
@@ -53,7 +55,6 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
     const newMessages = messages.getMessage(currentChat!.id)
     setChatMessages(newMessages)
     setTextMessage('')
-    console.dir(divRef.current)
   }
 
   const onKeyPressHandler = (event: any) => {
@@ -85,8 +86,6 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
             </>
           )
       }
-
-
     </div>
   )
 }

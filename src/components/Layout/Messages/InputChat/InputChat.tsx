@@ -1,12 +1,7 @@
-import React, {ChangeEvent, ChangeEventHandler, MouseEventHandler, useState, useContext} from 'react'
+import React from 'react'
 import classes from './InputChat.module.scss'
 import InputMessage from '../../../UI/InputMessage/InputMessage'
 import InputSelectFile from '../../../UI/InputSelectFile/InputSelectFile'
-import messages from '../../../../data/messages'
-import {ChatContext} from '../../Layout'
-import {UserContext} from '../../Layout'
-import {IChatList} from '../../../../data/chatList'
-import Users from '../../../../data/users'
 
 
 interface IInputChat {
@@ -17,10 +12,6 @@ interface IInputChat {
 }
 
 function InputChat({onSendMessageHandler, textMessage, onChangeInput, onKeyPressHandler}: IInputChat) {
-
-  const currentChat: any = useContext(ChatContext)
-
-  const currentMessages = messages.getMessage(currentChat!.id)
 
   return (
     <div className={classes.InputChat}>
@@ -44,9 +35,6 @@ function InputChat({onSendMessageHandler, textMessage, onChangeInput, onKeyPress
           </button>
         )
       }
-
-
-
     </div>
   )
 }

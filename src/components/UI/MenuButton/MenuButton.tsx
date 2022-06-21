@@ -1,7 +1,7 @@
-import React, {DetailedHTMLProps, ImgHTMLAttributes, ReactNode} from 'react'
+import React, {ReactNode} from 'react'
 import classes from './MenuButton.module.scss'
 
-interface IMenuButton {
+type IMenuButton = {
   text?: string
   onChange?: React.ChangeEventHandler
   children: ReactNode

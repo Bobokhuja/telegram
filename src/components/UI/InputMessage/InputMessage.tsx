@@ -1,18 +1,20 @@
 import React, {ChangeEventHandler} from 'react'
 import classes from './InputMessage.module.scss'
 
-interface IInputMessage {
+type IInputMessage = {
   value: string
   onChange: ChangeEventHandler
   customClass?: string
-  onKeyPressHandler?: any
+  onKeyPressHandler?:  React.KeyboardEventHandler<HTMLInputElement>
 }
 
 function InputMessage({value, onChange, customClass, onKeyPressHandler}: IInputMessage) {
-  const htmlFor: string = Math.random().toString()
+  const htmlFor: string = `inputMessage`
 
-  const cls = [classes.InputMessage]
-  if (customClass) cls.push(customClass)
+  const cls = [
+    classes.InputMessage,
+    customClass && customClass
+  ]
 
   return (
     <div className={cls.join(' ')}>

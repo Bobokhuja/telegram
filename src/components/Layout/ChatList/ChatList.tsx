@@ -3,7 +3,7 @@ import classes from './ChatList.module.scss'
 import ChatItem from './ChatItem/ChatItem'
 import chatList from '../../../data/chatList'
 import users from '../../../data/users'
-import {IMessages} from '../../../data/messages'
+import {IMessage} from '../../../data/messages'
 import messages from '../../../data/messages'
 
 type IChat = {

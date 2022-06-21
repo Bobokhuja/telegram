@@ -1,7 +1,7 @@
 import React, {ChangeEventHandler} from 'react'
 import classes from './SeatchInput.module.scss'
 
-interface IInput {
+type IInput = {
   label?: string
   type: string
   value?: string
@@ -11,14 +11,11 @@ interface IInput {
 }
 
 function SearchInput({type, value, label = '', placeholder = '', onChange}: IInput) {
-
-  const htmlFor: string = `${type}-${Math.random()}`
+  const htmlFor: string = 'searchInput'
 
   return (
     <div className={classes.SearchInput}>
-      <label htmlFor={htmlFor}>
-        {label}
-      </label>
+      <label htmlFor={htmlFor}>{label}</label>
       <input
         type={type}
         value={value}

@@ -1,15 +1,16 @@
 import React from 'react'
 import classes from './Message.module.scss'
 
-interface IMessage {
+type IMessage = {
   message: string
   isYour: boolean
 }
 
 function Message({message, isYour}: IMessage) {
-  const cls = [classes.Message]
-  if (isYour) cls.push(classes.YourMessage)
-  else cls.push(classes.HisMessage)
+  const cls = [
+    classes.Message,
+    isYour ? classes.YourMessage : classes.HisMessage
+  ]
 
   return (
     <div className={cls.join(' ')}>

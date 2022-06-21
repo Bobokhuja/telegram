@@ -1,4 +1,4 @@
-export type IMessages = {
+export type IMessage = {
   id?: string
   chatId: string
   userId: string
@@ -6,60 +6,46 @@ export type IMessages = {
   date: Date
 }
 
+const localMessagesString: string | null = localStorage.getItem('messages')
+let localMessages: IMessage[] = []
+
+if (localMessagesString) localMessages = JSON.parse(localMessagesString)
+else localStorage.setItem('messages', JSON.stringify([]))
+
+function update(messages: IMessage[]) {
+  localStorage.setItem('messages', JSON.stringify(messages))
+}
+function nextMessageId(messages: IMessage[]): string {
+  const id = messages.length ? '1' : (Math.max(...messages.map(message => +message.id!)) + 1).toString()
+  if (messages.length === 0) {
+    return '1'
+  } else {
+    return (Math.max(...messages.map(message => +message.id!)) + 1).toString()
+  }
+}
+function sortMessageByDateTime(messages: IMessage[]) {
+  return messages.sort((a, b): number => (a.date.getTime() > b.date.getTime() ? 1 : -1))
+}
+
 function messages(): any {
-  const messages: IMessages[] = [
-    {
-      id: '1',
-      chatId: '1',
-      userId: '2',
-      message: 'Салом',
-      date: new Date(2022, 5, 21, 7, 50, 10, 0)
-    },
-    {
-      id: '2',
-      chatId: '1',
-      userId: '1',
-      message: 'Воалейкум салом',
-      date: new Date(2022, 5, 21, 8, 1, 0, 0)
-    },
-    {
-      id: '3',
-      chatId: '1',
-      userId: '1',
-      message: 'Чхел Шумо',
-      date: new Date(2022, 5, 21, 8, 1, 0, 0)
-    },
-    {
-      id: '4',
-      chatId: '1',
-      userId: '2',
-      message: 'Мешад соз. Чува намеби?',
-      date: new Date(2022, 5, 21, 8, 1, 0, 0)
-    }
-  ]
+  const messages: IMessage[] = localMessages.map(chat => ({...chat, date: new Date(chat.date)}))
 
   return {
-    getMessages(): IMessages[] {
+    getMessages(): IMessage[] {
       return messages
     },
-    getMessage(chatId: string): any {
-      return messages
-        .filter((message: IMessages) => chatId === message.chatId)
-        .sort((a, b): any => (a.date.getTime() > b.date.getTime() ? 1 : -1))
+    getMessage(chatId: string): IMessage[] {
+      return sortMessageByDateTime(messages.filter((message: IMessage) => chatId === message.chatId))
     },
-    setMessage(message: IMessages) {
-      const id = (Math.max(...messages.map(message => +message.id!)) + 1).toString()
-
+    setMessage(message: IMessage) {
       messages.unshift({
-        id,
+        id: nextMessageId(messages),
         ...message
       })
+      update(messages)
     },
-    getLastMessage(chatId: any) {
-      return messages
-        .filter((message: IMessages) => chatId === message.chatId)
-        .sort((a, b): any => (a.date.getTime() > b.date.getTime() ? 1 : -1))
-        .pop()
+    getLastMessage(chatId: string): IMessage | undefined {
+      return sortMessageByDateTime(messages.filter((message: IMessage) => chatId === message.chatId)).pop()
     }
   }
 }

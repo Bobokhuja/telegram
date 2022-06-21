@@ -1,14 +1,12 @@
 import React, {useEffect, useState, useContext, ChangeEventHandler, ChangeEvent} from 'react'
 import classes from './MessageContainer.module.scss'
 import Message from '../../../UI/Message/Message'
-import messages, {IMessages} from '../../../../data/messages'
-import users, {IUsers} from '../../../../data/users'
-import chatList from '../../../../data/chatList'
+import {IUser} from '../../../../data/users'
 import {useParams} from 'react-router-dom'
 import {UserContext} from '../../Layout'
 
 function MessageContainer({stateMessages, divRef}: any) {
-  const user = useContext<IUsers>(UserContext)
+  const user = useContext<IUser>(UserContext)
   const {chat} = useParams()
 
   useEffect(() => {

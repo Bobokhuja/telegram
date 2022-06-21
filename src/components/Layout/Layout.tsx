@@ -5,32 +5,39 @@ import ChatList from './ChatList/ChatList'
 import SearchInput from '../UI/SearchInput/SearchInput'
 import Messages from './Messages/Messages'
 import bg from '../../assets/bg-messages.jpg'
-import users, {IUsers} from '../../data/users'
-import chatList, {IChatList} from '../../data/chatList'
-import {useParams} from 'react-router-dom'
-import messages, {IMessages} from '../../data/messages'
+import users, {IUser} from '../../data/users'
+import chatList, {IChat} from '../../data/chatList'
+import {useNavigate, useParams} from 'react-router-dom'
+import messages, {IMessage} from '../../data/messages'
+import checkChat from '../../utils/checkChat'
 
-export const UserContext = createContext<IUsers>({} as IUsers)
-export const ChatContext = createContext('')
+//contexts
+export const UserContext = createContext({} as IUser)
+export const ChatContext = createContext({} as IChat)
 export const MessagesContext = createContext({})
 
-interface ILayout {
-  children?: React.ReactNode
+type IDataChat = {
+  id: string
+  title: string
+  text: string
+  sender: string
+  address: string
+  date: string
 }
 
-function getNewDataChats() {
+function getNewDataChats(): IDataChat[] {
   return chatList.map((chat, index) => {
-    let lastMessage = messages.getLastMessage(chat.id)
-    let date
-    let text = 'no messages'
-    let sender = users.find(user => {
+    let lastMessage: IMessage = messages.getLastMessage(chat.id)
+    let date: string = ''
+    let text: string = 'no messages'
+    let sender: IUser = users.find(user => {
       if (lastMessage) {
-        date = lastMessage.date
+        date = `${lastMessage.date.getHours().toString().padStart(2, '0')}:${lastMessage.date.getMinutes().toString().padStart(2, '0')}`
         text = lastMessage.message
-        date = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
         if (user.id === lastMessage.userId) return true
       }
-    })
+      return false
+    })!
 
     return {
       id: chat.id,
@@ -43,20 +50,29 @@ function getNewDataChats() {
   })
 }
 
-function Layout({children}: ILayout) {
+function Layout() {
+  //Hook
+  //States
   const [search, setSearch] = useState<string>('')
-  const [chatMessages, setChatMessages] = useState<IMessages[]>([])
-  const [chats, setChats] = useState(getNewDataChats())
-  const {chat} = useParams()
-  const currentChat: any = chatList.find((chatItem) => chatItem.chatName === chat)
+  const [chatMessages, setChatMessages] = useState<IMessage[]>([])
+  const [chats, setChats] = useState<IDataChat[]>(getNewDataChats())
+  const {chat} = useParams<string>()
+  const navigate = useNavigate()
+  const currentChat: IChat | undefined = chatList.find((chatItem) => chatItem.chatName === chat)!
+
+  //Hook
+  //effects
+  useEffect(() => {
+    setChats(getNewDataChats())
+  }, [chatMessages])
+
+  useEffect(() => {
+    if (!checkChat(chat!)) navigate('/')
+  }, [chat])
 
   const onChangeHandler: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value)
   }
-
-  useEffect(() => {
-    setChats(getNewDataChats())
-  }, [chatMessages])
 
   return (
     <div className={classes.Layout}>
@@ -75,7 +91,6 @@ function Layout({children}: ILayout) {
                 dataChats={chats}
               />
             </div>
-
           </div>
           <div className={classes.Right} style={{backgroundImage: `url('${bg}')`}}>
             <Messages
