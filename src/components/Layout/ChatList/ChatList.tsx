@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import classes from './ChatList.module.scss'
-import SearchInput from '../../UI/SearchInput/SearchInput'
 import ChatItem from './ChatItem/ChatItem'
 import chatList from '../../../data/chatList'
-import messages from '../../../data/messages'
 import users from '../../../data/users'
+import {IMessages} from '../../../data/messages'
+import messages from '../../../data/messages'
 
 type IChat = {
   id: string
@@ -16,37 +16,18 @@ type IChat = {
 }
 
 const dataChats = chatList.map((chat, index) => {
-  const resultChat = {} as IChat
-  let lastMessage = messages.reverse().find(message => (message.chatId === chat.id))
+  let lastMessage = messages.getMessages().reverse().find((message: IMessages) => (message.chatId === chat.id))
   let sender = users.find(user => user.id === lastMessage!.userId)
-  console.log(sender)
-  resultChat.id = chat.id
-  resultChat.title = chat.name
-  resultChat.text = lastMessage!.message
-  resultChat.sender = sender!.name
-  resultChat.address = chat.chatName
-  resultChat.date = lastMessage!.date.toLocaleString()
-  return resultChat
+  const {date} = lastMessage!
+  return {
+    id: chat.id,
+    title: chat.name,
+    text: lastMessage!.message,
+    sender: sender!.name,
+    address: chat.chatName,
+    date: `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+  }
 })
-
-// const dataChats = [
-//   {
-//     id: 1,
-//     title: 'ReactJS',
-//     text: 'Hello',
-//     sender: 'Ilmhona',
-//     date: '11:30',
-//     address: 'reactjs'
-//   },
-//   {
-//     id: 2,
-//     title: 'Книги для программистов',
-//     text: 'Hello World! this is a public',
-//     // sender: '',
-//     date: 'Wed',
-//     address: 'booksofprogrammer'
-//   }
-// ]
 
 function ChatList() {
 

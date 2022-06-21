@@ -1,91 +1,30 @@
-import React from 'react'
+import React, {useEffect, useState, useContext, ChangeEventHandler, ChangeEvent} from 'react'
 import classes from './MessageContainer.module.scss'
 import Message from '../../../UI/Message/Message'
+import messages, {IMessages} from '../../../../data/messages'
+import users, {IUsers} from '../../../../data/users'
+import chatList from '../../../../data/chatList'
+import {useParams} from 'react-router-dom'
+import {UserContext} from '../../Layout'
 
-function MessageContainer() {
+function MessageContainer({stateMessages}: any) {
+  const user = useContext<IUsers>(UserContext)
+  const {chat} = useParams()
+
   return (
     <div className={classes.MessageContainer}>
       <div className={classes.Wrap}>
-        <Message
-          message="Hello"
-          isYour={true}
-        />
-        <Message
-          message="Hello"
-          isYour={false}
-        />
-        <Message
-          message="Hello"
-          isYour={false}
-        />
-        <Message
-          message="HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"
-          isYour={true}
-        />
-        <Message
-          message="Hello HelloHelloHello HelloHelloH lloHelloHello HelloHelloH lloHelloH  elloHel oHelloHelloHelloHelloHelloHell oHello  HelloHelloHelloHelloHelloHello"
-          isYour={true}
-        />
-        <Message
-          message="Hello"
-          isYour={true}
-        />
-        <Message
-          message="Hello"
-          isYour={false}
-        />
-        <Message
-          message="Hello"
-          isYour={false}
-        />
-        <Message
-          message="HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"
-          isYour={true}
-        />
-        <Message
-          message="Hello HelloHelloHello HelloHelloH lloHelloHello HelloHelloH lloHelloH  elloHel oHelloHelloHelloHelloHelloHell oHello  HelloHelloHelloHelloHelloHello"
-          isYour={true}
-        />
-        <Message
-          message="Hello"
-          isYour={true}
-        />
-        <Message
-          message="Hello"
-          isYour={false}
-        />
-        <Message
-          message="Hello"
-          isYour={false}
-        />
-        <Message
-          message="HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"
-          isYour={true}
-        />
-        <Message
-          message="Hello HelloHelloHello HelloHelloH lloHelloHello HelloHelloH lloHelloH  elloHel oHelloHelloHelloHelloHelloHell oHello  HelloHelloHelloHelloHelloHello"
-          isYour={true}
-        />
-        <Message
-          message="Hello"
-          isYour={true}
-        />
-        <Message
-          message="Hello"
-          isYour={false}
-        />
-        <Message
-          message="Hello"
-          isYour={false}
-        />
-        <Message
-          message="HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"
-          isYour={true}
-        />
-        <Message
-          message="Hello HelloHelloHello HelloHelloH lloHelloHello HelloHelloH lloHelloH  elloHel oHelloHelloHelloHelloHelloHell oHello  HelloHelloHelloHelloHelloHello"
-          isYour={true}
-        />
+        {
+          stateMessages.map((message: any) => {
+            return (
+              <Message
+                key={message.id}
+                message={message.message}
+                isYour={user.id === message.userId}
+              />
+            )
+          })
+        }
       </div>
     </div>
   )

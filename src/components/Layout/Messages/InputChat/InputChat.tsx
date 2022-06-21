@@ -1,18 +1,25 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from 'react'
+import React, {ChangeEvent, ChangeEventHandler, MouseEventHandler, useState, useContext} from 'react'
 import classes from './InputChat.module.scss'
 import InputMessage from '../../../UI/InputMessage/InputMessage'
 import InputSelectFile from '../../../UI/InputSelectFile/InputSelectFile'
+import messages from '../../../../data/messages'
+import {ChatContext} from '../../Layout'
+import {UserContext} from '../../Layout'
+import {IChatList} from '../../../../data/chatList'
+import Users from '../../../../data/users'
+
 
 interface IInputChat {
-
+  onChangeInput: any
+  textMessage: string
+  onSendMessageHandler: any
 }
 
-function InputChat({}: IInputChat) {
-  const [textMessage, setTextMessage] = useState<string>('')
+function InputChat({onChangeInput, textMessage, onSendMessageHandler}: IInputChat) {
 
-  const onChangeInput: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setTextMessage(event.target.value)
-  }
+  const currentChat: any = useContext(ChatContext)
+
+  const currentMessages = messages.getMessage(currentChat!.id)
 
   return (
     <div className={classes.InputChat}>
@@ -27,7 +34,10 @@ function InputChat({}: IInputChat) {
 
       {
         textMessage && (
-          <button className={classes.Send}>
+          <button
+            className={classes.Send}
+            onClick={onSendMessageHandler}
+          >
             <span className="material-symbols-outlined">send</span>
           </button>
         )
