@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler, useContext, useEffect, useState} from 'react'
+import React, {ChangeEvent, ChangeEventHandler, useContext, useEffect, useRef, useState} from 'react'
 import classes from './Messages.module.scss'
 import HeaderMessages from './HeaderMessages/HeaderMessages'
 import {useParams} from 'react-router-dom'
@@ -7,42 +7,57 @@ import MessageContainer from './MessageContainer/MessageContainer'
 import chatList from '../../../data/chatList'
 import messages, {IMessages} from '../../../data/messages'
 import {UserContext} from '../Layout'
+import {ChatContext} from '../Layout'
 
-function Messages() {
-  const [title, setTitle] = useState('')
+type IMessagesComponent = {
+  // title: string
+  chatMessages: IMessages[]
+  setChatMessages: any
+  // textMessage: string
+  // onChangeInput: any
+}
+
+function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
+  const [title, setTitle] = useState<string>('')
+
   const [textMessage, setTextMessage] = useState<string>('')
-  const [stateMessages, setStateMessages] = useState<IMessages[]>([])
 
-  const {chat} = useParams()
-  const user: any = useContext(UserContext)
-  useEffect(() => {
-    if (chat) {
-      setTitle(currentChat!.name)
-    }
-  }, [])
-
-  useEffect(() => {
-    const currentChat = chatList.find((chatItem) => chatItem.chatName === chat)
-    const currentMessages = messages.getMessage(currentChat!.id)
-    setStateMessages(currentMessages)
-  }, [])
-  const currentChat = chatList.find(chatItem => chatItem.chatName === chat)
   const onChangeInput: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setTextMessage(event.target.value)
   }
+  const divRef = useRef(null)
 
-  const onSendMessageHandler: any = (event: any) => {
+  const {chat} = useParams()
+  const user: any = useContext(UserContext)
+  const currentChat: any = useContext(ChatContext)
+  useEffect(() => {
+    if (chat) setTitle(currentChat.name)
+  }, [chat])
+
+  useEffect(() => {
+    if (chat) {
+      const currentMessages = messages.getMessage(currentChat!.id)
+      setChatMessages(currentMessages)
+    }
+  }, [chat])
+
+  const onSendMessageHandler: any = (text: string) => () => {
+    if (!textMessage.trim()) return false
     const currentChat = chatList.find((chatItem) => chatItem.chatName === chat)
-    const currentMessages = messages.getMessage(currentChat!.id)
     messages.setMessage({
       chatId: currentChat!.id,
       userId: user.id,
-      message: textMessage,
+      message: text,
       date: new Date()
     })
-    setStateMessages([
-      ...currentMessages,
-    ])
+    const newMessages = messages.getMessage(currentChat!.id)
+    setChatMessages(newMessages)
+    setTextMessage('')
+    console.dir(divRef.current)
+  }
+
+  const onKeyPressHandler = (event: any) => {
+    if (event.key === 'Enter') onSendMessageHandler(textMessage)()
   }
 
   return (
@@ -60,11 +75,12 @@ function Messages() {
                 title={title}
                 chatinfo="online"
               />
-              <MessageContainer stateMessages={stateMessages} />
+              <MessageContainer divRef={divRef} stateMessages={chatMessages} />
               <InputChat
-                onChangeInput={onChangeInput}
-                textMessage={textMessage}
                 onSendMessageHandler={onSendMessageHandler}
+                textMessage={textMessage}
+                onChangeInput={onChangeInput}
+                onKeyPressHandler={onKeyPressHandler}
               />
             </>
           )

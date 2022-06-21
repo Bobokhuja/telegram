@@ -10,12 +10,13 @@ import Users from '../../../../data/users'
 
 
 interface IInputChat {
-  onChangeInput: any
-  textMessage: string
   onSendMessageHandler: any
+  textMessage: string
+  onChangeInput: any
+  onKeyPressHandler: any
 }
 
-function InputChat({onChangeInput, textMessage, onSendMessageHandler}: IInputChat) {
+function InputChat({onSendMessageHandler, textMessage, onChangeInput, onKeyPressHandler}: IInputChat) {
 
   const currentChat: any = useContext(ChatContext)
 
@@ -30,13 +31,14 @@ function InputChat({onChangeInput, textMessage, onSendMessageHandler}: IInputCha
         value={textMessage}
         onChange={onChangeInput}
         customClass={classes.InputText}
+        onKeyPressHandler={onKeyPressHandler}
       />
 
       {
         textMessage && (
           <button
             className={classes.Send}
-            onClick={onSendMessageHandler}
+            onClick={onSendMessageHandler(textMessage)}
           >
             <span className="material-symbols-outlined">send</span>
           </button>

@@ -25,6 +25,7 @@
   .MessageTailFilled {
     display: block;
     margin-bottom: -1px;
+    fill: #eefdde;
   }
 }
 
@@ -43,12 +44,14 @@
   .MessageTailFilled {
     transform: scaleX(-1);
     order: 1;
+    fill: #fff;
+    margin-left: -1px;
   }
 }
 
 .MessageTailFilled {
   display: block;
-  margin-bottom: -1px;
+  margin-bottom: -1.1px;
   flex-grow: 0;
   flex-shrink: 0;
 }

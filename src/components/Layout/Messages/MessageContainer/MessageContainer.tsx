@@ -7,12 +7,17 @@ import chatList from '../../../../data/chatList'
 import {useParams} from 'react-router-dom'
 import {UserContext} from '../../Layout'
 
-function MessageContainer({stateMessages}: any) {
+function MessageContainer({stateMessages, divRef}: any) {
   const user = useContext<IUsers>(UserContext)
   const {chat} = useParams()
 
+  useEffect(() => {
+    // @ts-ignore
+    divRef.current!.scrollTop = divRef.current!.scrollHeight + divRef.current!.scrollHeight
+  }, [stateMessages])
+
   return (
-    <div className={classes.MessageContainer}>
+    <div className={classes.MessageContainer} ref={divRef}>
       <div className={classes.Wrap}>
         {
           stateMessages.map((message: any) => {

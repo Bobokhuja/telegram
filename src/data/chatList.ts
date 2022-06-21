@@ -14,13 +14,13 @@ const chatList: IChatList[] = [
     userId: '1',
     participantsId: ['1', '2']
   },
-  // {
-  //   id: '2',
-  //   chatName: 'dexter',
-  //   name: 'Dexter Morgan',
-  //   userId: '1',
-  //   participantsId: ['1', '3']
-  // }
+  {
+    id: '2',
+    chatName: 'dexter',
+    name: 'Dexter Morgan',
+    userId: '1',
+    participantsId: ['1', '3']
+  }
 ]
 
 export default chatList

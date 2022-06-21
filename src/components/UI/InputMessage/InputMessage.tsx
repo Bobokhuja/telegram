@@ -5,9 +5,10 @@ interface IInputMessage {
   value: string
   onChange: ChangeEventHandler
   customClass?: string
+  onKeyPressHandler?: any
 }
 
-function InputMessage({value, onChange, customClass}: IInputMessage) {
+function InputMessage({value, onChange, customClass, onKeyPressHandler}: IInputMessage) {
   const htmlFor: string = Math.random().toString()
 
   const cls = [classes.InputMessage]
@@ -20,6 +21,7 @@ function InputMessage({value, onChange, customClass}: IInputMessage) {
         value={value}
         onChange={onChange}
         id={htmlFor}
+        onKeyPress={onKeyPressHandler}
       />
       <label htmlFor={htmlFor}>Write a message</label>
     </div>

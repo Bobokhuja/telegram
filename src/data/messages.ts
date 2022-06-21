@@ -54,6 +54,12 @@ function messages(): any {
         id,
         ...message
       })
+    },
+    getLastMessage(chatId: any) {
+      return messages
+        .filter((message: IMessages) => chatId === message.chatId)
+        .sort((a, b): any => (a.date.getTime() > b.date.getTime() ? 1 : -1))
+        .pop()
     }
   }
 }

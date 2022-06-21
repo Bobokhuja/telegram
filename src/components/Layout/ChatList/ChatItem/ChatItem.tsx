@@ -6,10 +6,10 @@ import reactIcon from '../../../../assets/logo-og.png'
 interface IChatItem {
   title: string,
   address: string
-  text: string
+  text?: string
   sender?: string
-  date: string
-  onClick: any
+  date?: string
+  onClick?: any
 }
 
 function ChatItem({title, text, date, sender, onClick, address}: IChatItem) {

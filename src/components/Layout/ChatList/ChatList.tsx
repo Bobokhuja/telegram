@@ -15,39 +15,22 @@ type IChat = {
   sender: string
 }
 
-const dataChats = chatList.map((chat, index) => {
-  let lastMessage = messages.getMessages().reverse().find((message: IMessages) => (message.chatId === chat.id))
-  let sender = users.find(user => user.id === lastMessage!.userId)
-  const {date} = lastMessage!
-  return {
-    id: chat.id,
-    title: chat.name,
-    text: lastMessage!.message,
-    sender: sender!.name,
-    address: chat.chatName,
-    date: `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
-  }
-})
+type IChatList = {
+  dataChats: any
+}
 
-function ChatList() {
-
-  const [chats, setChats] = useState(dataChats)
-
-  const onClickHandler = (event: MouseEvent) => {
-
-  }
+function ChatList({dataChats}: IChatList) {
 
   return (
     <div className={classes.ChatList}>
       <div className={classes.Wrapper}>
         {
-          dataChats.map(chat => (
+          dataChats.map((chat: any) => (
               <ChatItem
                 key={chat.address}
                 title={chat.title}
                 text={chat.text}
                 date={chat.date}
-                onClick={onClickHandler}
                 address={chat.address}
                 sender={chat.sender}
               />
