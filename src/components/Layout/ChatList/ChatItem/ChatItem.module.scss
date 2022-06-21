@@ -88,6 +88,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-end;
   text-align: right;
 
   p {
@@ -98,9 +99,10 @@ a {
 }
 
 .pin {
-  transform: translateY(-5px) rotate(45deg);
+  transform: rotate(45deg);
   transform-origin: center center;
-  display: block;
+  display: inline-block;
+  width: 18px;
   font-size: 18px;
   color: #aaa;
 }
