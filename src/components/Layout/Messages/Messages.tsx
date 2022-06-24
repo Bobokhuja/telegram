@@ -9,6 +9,7 @@ import messages, {IMessage} from '../../../data/messages'
 import {UserContext} from '../Layout'
 import {ChatContext} from '../Layout'
 import checkChat from '../../../utils/checkChat'
+import {getDraft, removeDraft, setDraft} from '../../../utils/draft'
 
 type IMessagesComponent = {
   chatMessages: IMessage[]
@@ -28,7 +29,10 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
   const currentChat: any = useContext(ChatContext)
 
   useEffect(() => {
-    if (checkChat(chat!)) setTitle(currentChat.name)
+    if (checkChat(chat!)) {
+      setTitle(currentChat.name)
+    }
+    setTextMessage(getDraft(currentChat.id))
   }, [chat])
 
   useEffect(() => {
@@ -41,6 +45,7 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
   // Handlers
   const onChangeInput: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setTextMessage(event.target.value)
+    setDraft(currentChat.id, event.target.value)
   }
 
   const onSendMessageHandler: any = (text: string) => () => {
@@ -55,6 +60,7 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
     const newMessages = messages.getMessage(currentChat!.id)
     setChatMessages(newMessages)
     setTextMessage('')
+    removeDraft(currentChat!.id)
   }
 
   const onKeyPressHandler = (event: any) => {
