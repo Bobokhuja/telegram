@@ -1,5 +1,5 @@
-import users, {IUser} from './users'
-import messages, {IMessage} from './messages'
+import { IUser } from './User.service'
+import { IMessage } from './Message.service'
 
 export type IChat = {
   id: string // Chat id
@@ -8,33 +8,6 @@ export type IChat = {
   userId: string // creator chatRoute userRoute id
   participantsId: string[] // array of userRoute id participants
 }
-
-function update(chats: IChat[]) {
-  localStorage.setItem('chatList', JSON.stringify(chats))
-}
-
-const localChatListString: string | null = localStorage.getItem('chatList')
-let localChatList: IChat[] = [
-  {
-    id: '2',
-    chatName: 'burhon',
-    name: 'Abdulloev Burhon',
-    userId: '1',
-    participantsId: ['1', '4']
-  },
-  {
-    id: '1',
-    chatName: 'ahmad',
-    name: 'Ahmad',
-    userId: '1',
-    participantsId: ['1', '2']
-  }
-]
-if (localChatListString) localChatList = JSON.parse(localChatListString)
-else localStorage.setItem('chatList', JSON.stringify([]))
-
-const chatList: IChat[] = localChatList
-update(chatList)
 
 export type IDataChat = {
   id: string
@@ -50,8 +23,13 @@ export function getFormatDate(date: Date, type: string = 'time') {
   return date.toLocaleDateString()
 }
 
-export function getNewDataChats(): IDataChat[] {
-  return chatList.map((chat, index) => {
+export async function getChatList(): Promise<IChat[]> {
+  const response = await fetch('http://192.168.0.100:8080/chat')
+  return await response.json()
+}
+
+export async function getNewDataChats(): Promise<IDataChat[]> {
+  return (await getChatList()).map((chat, index) => {
     let lastMessage: IMessage = messages.getLastMessage(chat.id)
     let date: string = ''
     let text: string = 'no messages'
@@ -74,9 +52,3 @@ export function getNewDataChats(): IDataChat[] {
     }
   })
 }
-
-export function getChatsByName(value: string) {
-  if (value === '') return
-}
-
-export default chatList

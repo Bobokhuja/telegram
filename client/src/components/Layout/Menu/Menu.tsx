@@ -30,7 +30,7 @@ function Menu() {
           </li>
           <li>
             <MenuButton text="New">
-              <span className={cls.join(' ')}>chat</span>
+              <span className={cls.join(' ')}>chatRoute</span>
             </MenuButton>
           </li>
           <li>
@@ -39,7 +39,7 @@ function Menu() {
             </MenuButton>
           </li>
           <li>
-            <MenuButton text="Add chat">
+            <MenuButton text="Add chatRoute">
               <span className={cls.join(' ')}>contacts</span>
             </MenuButton>
           </li>

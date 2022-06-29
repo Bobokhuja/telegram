@@ -8,7 +8,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout/>}>
-        <Route path=":chat" element={<></>} />
+        <Route path=":chatRoute" element={<></>} />
       </Route>
       <Route path="/auth" element={<Auth/>}/>
     </Routes>

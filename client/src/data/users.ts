@@ -1,7 +1,7 @@
 export type IUser = {
   id: string // User id
   username: string // username
-  name: string // lastname user
+  name: string // lastname userRoute
 }
 
 function update(users: IUser[]) {

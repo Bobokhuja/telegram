@@ -1,8 +1,6 @@
-import { app } from '../index.js'
 import { users } from '../index.js'
 
-
-export const user = {
+export const userRoute = {
   getUsers(req, res) {
     res.header('Something', 'else');
     const payload = req.query.username
