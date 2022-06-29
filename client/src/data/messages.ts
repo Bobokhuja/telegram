@@ -16,7 +16,7 @@ function update(messages: IMessage[]) {
   localStorage.setItem('messages', JSON.stringify(messages))
 }
 function nextMessageId(messages: IMessage[]): string {
-  const id = messages.length ? '1' : (Math.max(...messages.map(message => +message.id!)) + 1).toString()
+  // const id = messages.length ? '1' : (Math.max(...messages.map(message => +message.id!)) + 1).toString()
   if (messages.length === 0) {
     return '1'
   } else {

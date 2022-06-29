@@ -7,11 +7,16 @@
   p {
     margin: 0;
     display: inline;
-    padding: 7px 15px;
+    padding: 7px 5px 5px 8px;
     max-width: 40%;
+    min-width: 50px;
     word-break: break-all;
-    font-size: 14px;
+    font-size: 13px;
   }
+}
+
+.TextMessage {
+  vertical-align: top;
 }
 
 .YourMessage {
@@ -54,4 +59,12 @@
   margin-bottom: -1.1px;
   flex-grow: 0;
   flex-shrink: 0;
+}
+
+.Date {
+  display: inline-block;
+  margin: 12px 0 0 8px;
+  font-size: 11px;
+  color: #aaa;
+  text-align: right;
 }

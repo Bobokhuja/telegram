@@ -24,6 +24,7 @@ function MessageContainer({stateMessages, divRef}: any) {
                 key={message.id}
                 message={message.message}
                 isYour={user.id === message.userId}
+                date={message.date.toLocaleTimeString().slice(0, -3)}
               />
             )
           })

@@ -31,8 +31,8 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
   useEffect(() => {
     if (checkChat(chat!)) {
       setTitle(currentChat.name)
+      setTextMessage(getDraft(currentChat.id))
     }
-    setTextMessage(getDraft(currentChat.id))
   }, [chat])
 
   useEffect(() => {

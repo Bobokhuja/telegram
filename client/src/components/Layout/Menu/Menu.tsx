@@ -1,9 +1,6 @@
 import React from 'react'
 import classes from './Menu.module.scss'
 import MenuButton from '../../UI/MenuButton/MenuButton'
-import menuIcon from '../../../assets/menu.svg'
-import chats from '../../../assets/chats.svg'
-import SVGCreate from '../../UI/MenuButton/SVGCreate/SVGCreate'
 
 function Menu() {
 
@@ -39,6 +36,11 @@ function Menu() {
           <li>
             <MenuButton text="Edit">
               <span className={cls.join(' ')}>tune</span>
+            </MenuButton>
+          </li>
+          <li>
+            <MenuButton text="Add chat">
+              <span className={cls.join(' ')}>contacts</span>
             </MenuButton>
           </li>
         </ul>

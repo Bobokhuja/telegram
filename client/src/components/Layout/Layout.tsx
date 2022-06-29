@@ -8,47 +8,14 @@ import bg from '../../assets/bg-messages.jpg'
 import users, {IUser} from '../../data/users'
 import chatList, {IChat} from '../../data/chatList'
 import {useNavigate, useParams} from 'react-router-dom'
-import messages, {IMessage} from '../../data/messages'
+import {IMessage} from '../../data/messages'
 import checkChat from '../../utils/checkChat'
+import {IDataChat} from '../../data/chatList'
+import {getNewDataChats} from '../../data/chatList'
 
 //contexts
 export const UserContext = createContext({} as IUser)
 export const ChatContext = createContext({} as IChat)
-export const MessagesContext = createContext({})
-
-type IDataChat = {
-  id: string
-  title: string
-  text: string
-  sender: string
-  address: string
-  date: string
-}
-
-function getNewDataChats(): IDataChat[] {
-  return chatList.map((chat, index) => {
-    let lastMessage: IMessage = messages.getLastMessage(chat.id)
-    let date: string = ''
-    let text: string = 'no messages'
-    let sender: IUser = users.find(user => {
-      if (lastMessage) {
-        date = `${lastMessage.date.getHours().toString().padStart(2, '0')}:${lastMessage.date.getMinutes().toString().padStart(2, '0')}`
-        text = lastMessage.message
-        if (user.id === lastMessage.userId) return true
-      }
-      return false
-    })!
-
-    return {
-      id: chat.id,
-      title: chat.name,
-      text,
-      sender: sender && sender!.name,
-      address: chat.chatName,
-      date
-    }
-  })
-}
 
 function Layout() {
   //Hook
@@ -76,6 +43,7 @@ function Layout() {
 
   return (
     <div className={classes.Layout}>
+      {/*<ModalContact />*/}
       <UserContext.Provider value={users[0]}>
         <ChatContext.Provider value={currentChat}>
           <div className={classes.Left}>
