@@ -6,12 +6,6 @@ export type IMessage = {
   date: Date
 }
 
-function nextMessageId(messages: IMessage[]): string {
-  return messages.length
-    ? '1'
-    : (Math.max(...messages.map(message => +message.id!)) + 1).toString()
-}
-
 function sortMessageByDateTime(messages: IMessage[]) {
   return messages.sort((a, b): number => (a.date.getTime() > b.date.getTime() ? 1 : -1))
 }
@@ -30,8 +24,9 @@ function messages(): any {
       // })
       // update(messages)
     },
-    getLastMessage(chatId: string): IMessage | undefined {
-      return sortMessageByDateTime(messages.filter((message: IMessage) => chatId === message.chatId)).pop()
+    async getLastMessage(chatId: string): Promise<IMessage> {
+      const response = await fetch(`http://192.168.0.100:8080/messages/last-message/${chatId}`)
+      return response.json()
     }
   }
 }

@@ -1,5 +1,7 @@
-import { IUser } from './User.service'
+import { getUser, IUser } from './User.service'
 import { IMessage } from './Message.service'
+import messages from './Message.service'
+import chatList from '../../data/chatList'
 
 export type IChat = {
   id: string // Chat id
@@ -23,32 +25,11 @@ export function getFormatDate(date: Date, type: string = 'time') {
   return date.toLocaleDateString()
 }
 
-export async function getChatList(): Promise<IChat[]> {
-  const response = await fetch('http://192.168.0.100:8080/chat')
+export async function getChatList(userId: string): Promise<IChat[]> {
+  const response = await fetch(`http://192.168.0.100:8080/chat?id=${userId}&format=data-chats`)
   return await response.json()
 }
 
-export async function getNewDataChats(): Promise<IDataChat[]> {
-  return (await getChatList()).map((chat, index) => {
-    let lastMessage: IMessage = messages.getLastMessage(chat.id)
-    let date: string = ''
-    let text: string = 'no messages'
-    let sender: IUser = users.find(user => {
-      if (lastMessage) {
-        date = getFormatDate(lastMessage.date)
-        text = lastMessage.message
-        if (user.id === lastMessage.userId) return true
-      }
-      return false
-    })!
-
-    return {
-      id: chat.id,
-      title: chat.name,
-      text,
-      sender: sender && sender!.name,
-      address: chat.chatName,
-      date
-    }
-  })
+export async function checkChat(userId: string, chatName: string | undefined): Promise<boolean> {
+  return (await getChatList(userId)).some(chat => chat.chatName === chatName)
 }

@@ -16,8 +16,8 @@ function ChatItem({title, text, date, sender, onClick, address}: IChatItem) {
 
   const cls: string[] = [classes.ChatItem]
 
-  const {chat} = useParams()
-  if (chat === address) cls.push(classes.Active)
+  const {chatRoute} = useParams()
+  if (chatRoute === address) cls.push(classes.Active)
 
   return (
     <Link to={`/${address}`}>

@@ -9,33 +9,39 @@ import users, {IUser} from '../../data/users'
 import chatList, {IChat} from '../../data/chatList'
 import {useNavigate, useParams} from 'react-router-dom'
 import {IMessage} from '../../data/messages'
-import checkChat from '../../utils/checkChat'
+import { checkChat } from '../../services/ApiService/Chat.service'
 import {IDataChat} from '../../data/chatList'
-import {getNewDataChats} from '../../data/chatList'
+import { getChatList } from '../../services/ApiService/Chat.service'
 
 //contexts
 export const UserContext = createContext({} as IUser)
-export const ChatContext = createContext({} as IChat)
+export const ChatContext = createContext<IChat | undefined>({} as IChat)
 
 function Layout() {
   //Hook
   //States
   const [search, setSearch] = useState<string>('')
   const [chatMessages, setChatMessages] = useState<IMessage[]>([])
-  const [chats, setChats] = useState<IDataChat[]>(getNewDataChats())
-  const {chat} = useParams<string>()
+  // const [chats, setChats] = useState<IDataChat[]>([])
+  const [chats, setChats] = useState<any>([])
+  const {chatRoute} = useParams<string>()
   const navigate = useNavigate()
-  const currentChat: IChat | undefined = chatList.find((chatItem) => chatItem.chatName === chat)!
-
+  const currentChat: IChat | undefined = chats.find((chat: any) => chat.address === chatRoute)
   //Hook
   //effects
   useEffect(() => {
-    setChats(getNewDataChats())
+    (async function () {
+      const chats = await getChatList('1')
+      setChats(chats)
+    })()
   }, [chatMessages])
 
   useEffect(() => {
-    if (!checkChat(chat!)) navigate('/')
-  }, [chat])
+    checkChat('1', chatRoute)
+      .then(res => {
+        if (res) navigate('/')
+      })
+  }, [chatRoute])
 
   const onChangeHandler: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value)

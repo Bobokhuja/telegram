@@ -24,33 +24,33 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
 
   //Other Hooks
   const divRef = useRef(null)
-  const {chat} = useParams()
+  const {chatRoute} = useParams()
   const user: any = useContext(UserContext)
   const currentChat: any = useContext(ChatContext)
 
   useEffect(() => {
-    if (checkChat(chat!)) {
+    if (checkChat(chatRoute!)) {
       setTitle(currentChat.name)
       setTextMessage(getDraft(currentChat.id))
     }
-  }, [chat])
+  }, [chatRoute])
 
   useEffect(() => {
-    if (checkChat(chat!)) {
+    if (checkChat(chatRoute!)) {
       const currentMessages = messages.getMessage(currentChat!.id)
       setChatMessages(currentMessages)
     }
-  }, [chat])
+  }, [chatRoute])
 
   // Handlers
   const onChangeInput: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setTextMessage(event.target.value)
-    setDraft(currentChat.id, event.target.value)
+    // setDraft(currentChat.id, event.target.value)
   }
 
   const onSendMessageHandler: any = (text: string) => () => {
     if (!textMessage.trim()) return false
-    const currentChat = chatList.find((chatItem) => chatItem.chatName === chat)
+    const currentChat = chatList.find((chatItem) => chatItem.chatName === chatRoute)
     messages.setMessage({
       chatId: currentChat!.id,
       userId: user.id,
@@ -70,7 +70,7 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
   return (
     <div className={classes.Messages}>
       {
-        !chat
+        !chatRoute
           ? (
             <p className={classes.Alert}>
               <span className={classes.Alert}>Select a chat to start messaging</span>

@@ -6,6 +6,9 @@ import { router } from './routes/routes.js'
 export const app = express()
 app.use(cors())
 app.use('/', router)
+app.use(express.json({
+  type: 'application/json'
+}))
 const port = 8080
 
 export const users = [
@@ -24,6 +27,11 @@ export const users = [
     username: 'dexter',
     name: 'Dexter Morgan'
   },
+  {
+    id: '4',
+    username: 'shodmon',
+    name: 'Nakimov Shodmon'
+  },
 ]
 export const chatList = [
   {
@@ -38,6 +46,13 @@ export const chatList = [
     chatName: 'burhon',
     name: 'Abdulloev Burhon',
     userId: '1',
+    participantsId: ['1', '2']
+  },
+  {
+    id: '3',
+    chatName: 'shodmon',
+    name: 'Nakimov Shodmon',
+    userId: '3',
     participantsId: ['1', '4']
   }
 ]
@@ -57,6 +72,13 @@ export const messages = [
     date: new Date(2022, 5, 29, 0, 1, 0, 0)
   },
   {
+    id: '4',
+    chatId: '1',
+    userId: '1',
+    message: 'Соз рахмат',
+    date: new Date(2022, 5, 29, 0, 1, 0, 0)
+  },
+  {
     id: '3',
     chatId: '2',
     userId: '1',
@@ -65,15 +87,19 @@ export const messages = [
   },
 ]
 
-export function setMessage(message) {
-  messages.push(message)
+function nextMessageId(messages) {
+  return !messages.length
+    ? '1'
+    : (Math.max(...messages.map(message => +message.id)) + 1).toString()
 }
 
-
-app.post("/messages/:id", (req, res) => {
-  console.log(req.body)
-  res.send('hello')
-});
+export function setMessage(message, chatId) {
+  messages.push({
+    id: nextMessageId(messages),
+    chatId,
+    ...message
+  })
+}
 
 app.listen(port, () => {
   console.log('Server starting in port', port)
