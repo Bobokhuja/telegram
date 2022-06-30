@@ -30,7 +30,7 @@ function Menu() {
           </li>
           <li>
             <MenuButton text="New">
-              <span className={cls.join(' ')}>chatRoute</span>
+              <span className={cls.join(' ')}>chat</span>
             </MenuButton>
           </li>
           <li>

@@ -4,11 +4,10 @@ import HeaderMessages from './HeaderMessages/HeaderMessages'
 import {useParams} from 'react-router-dom'
 import InputChat from './InputChat/InputChat'
 import MessageContainer from './MessageContainer/MessageContainer'
-import chatList from '../../../data/chatList'
-import messages, {IMessage} from '../../../data/messages'
-import {UserContext} from '../Layout'
+import { getMessage, IMessage } from '../../../services/ApiService/Message.service'
+import {UserContext } from '../../../App'
 import {ChatContext} from '../Layout'
-import checkChat from '../../../utils/checkChat'
+import {checkChat} from '../../../services/ApiService/Chat.service'
 import {getDraft, removeDraft, setDraft} from '../../../utils/draft'
 
 type IMessagesComponent = {
@@ -29,17 +28,23 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
   const currentChat: any = useContext(ChatContext)
 
   useEffect(() => {
-    if (checkChat(chatRoute!)) {
-      setTitle(currentChat.name)
-      setTextMessage(getDraft(currentChat.id))
-    }
+    checkChat('1', chatRoute)
+      .then(res => {
+        if (res) {
+          setTitle(currentChat.name)
+          setTextMessage(getDraft(currentChat.id))
+        }
+      })
   }, [chatRoute])
 
   useEffect(() => {
-    if (checkChat(chatRoute!)) {
-      const currentMessages = messages.getMessage(currentChat!.id)
-      setChatMessages(currentMessages)
-    }
+    checkChat('1', chatRoute)
+      .then(res => {
+        if (res) {
+          const currentMessages = getMessage(currentChat!.id)
+          setChatMessages(currentMessages)
+        }
+      })
   }, [chatRoute])
 
   // Handlers
@@ -50,15 +55,15 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
 
   const onSendMessageHandler: any = (text: string) => () => {
     if (!textMessage.trim()) return false
-    const currentChat = chatList.find((chatItem) => chatItem.chatName === chatRoute)
-    messages.setMessage({
-      chatId: currentChat!.id,
-      userId: user.id,
-      message: text,
-      date: new Date()
-    })
-    const newMessages = messages.getMessage(currentChat!.id)
-    setChatMessages(newMessages)
+    // const currentChat = chatList.find((chatItem) => chatItem.chatName === chatRoute)
+    // messages.setMessage({
+    //   chatId: currentChat!.id,
+    //   userId: user.id,
+    //   message: text,
+    //   date: new Date()
+    // })
+    // const newMessages = messages.getMessage(currentChat!.id)
+    // setChatMessages(newMessages)
     setTextMessage('')
     removeDraft(currentChat!.id)
   }

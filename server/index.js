@@ -36,55 +36,46 @@ export const users = [
 export const chatList = [
   {
     id: '1',
-    chatName: 'ahmad',
-    name: 'Ahmad',
-    userId: '1',
     participantsId: ['1', '2']
   },
   {
     id: '2',
-    chatName: 'burhon',
-    name: 'Abdulloev Burhon',
-    userId: '1',
-    participantsId: ['1', '2']
+    participantsId: ['1', '4']
   },
   {
     id: '3',
-    chatName: 'shodmon',
-    name: 'Nakimov Shodmon',
-    userId: '3',
-    participantsId: ['1', '4']
+    participantsId: ['2', '3']
   }
 ]
 export const messages = [
   {
     id: '1',
     chatId: '1',
-    userId: '1',
-    message: 'Hi',
+    senderId: '1',
+    message: 'Салом',
     date: new Date(2022, 5, 29, 0, 0, 0, 0)
   },
   {
     id: '2',
     chatId: '1',
-    userId: '2',
-    message: 'What\'s up',
-    date: new Date(2022, 5, 29, 0, 1, 0, 0)
-  },
-  {
-    id: '4',
-    chatId: '1',
-    userId: '1',
-    message: 'Соз рахмат',
+    senderId: '2',
+    message: 'Воъалейкум салом',
     date: new Date(2022, 5, 29, 0, 1, 0, 0)
   },
   {
     id: '3',
-    chatId: '2',
-    userId: '1',
-    message: 'Чокади',
-    date: new Date(2022, 5, 28, 0, 1, 0, 0)
+    chatId: '1',
+    senderId: '1',
+    message: 'Саломатие чхе?',
+    date: new Date(2022, 5, 29, 0, 2, 0, 0)
   },
+  {
+    id: '3',
+    chatId: '1',
+    senderId: '2',
+    message: 'Соз рахмат!',
+    date: new Date(2022, 5, 29, 0, 3, 0, 0)
+  }
 ]
 
 function nextMessageId(messages) {

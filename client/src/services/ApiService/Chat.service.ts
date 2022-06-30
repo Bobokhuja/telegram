@@ -1,23 +1,20 @@
-import { getUser, IUser } from './User.service'
-import { IMessage } from './Message.service'
-import messages from './Message.service'
-import chatList from '../../data/chatList'
+import { serverIp } from '../../utils/server'
+import { getLastMessage } from './Message.service'
 
 export type IChat = {
+  address: string | undefined
   id: string // Chat id
   chatName: string // address of chatRoute
   name: string // full name of chatRoute
-  userId: string // creator chatRoute userRoute id
-  participantsId: string[] // array of userRoute id participants
 }
 
-export type IDataChat = {
+export type IChatForChatList = {
   id: string
-  title: string
-  text: string
-  sender: string
-  address: string
-  date: string
+  chatName: string
+  name: string
+  lastMessageDate?: Date
+  lastTextMessage?: string
+  lastTextSender?: string
 }
 
 export function getFormatDate(date: Date, type: string = 'time') {
@@ -25,8 +22,8 @@ export function getFormatDate(date: Date, type: string = 'time') {
   return date.toLocaleDateString()
 }
 
-export async function getChatList(userId: string): Promise<IChat[]> {
-  const response = await fetch(`http://192.168.0.100:8080/chat?id=${userId}&format=data-chats`)
+export async function getChatList(userId: string): Promise<IChatForChatList[]> {
+  const response = await fetch(`${serverIp}/chat?id=${userId}&format=data-chats`)
   return await response.json()
 }
 

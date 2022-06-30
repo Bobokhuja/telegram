@@ -1,21 +1,21 @@
-import React, {ChangeEvent, ChangeEventHandler, createContext, useEffect, useState} from 'react'
+import React, { ChangeEvent, ChangeEventHandler, createContext, useContext, useEffect, useState } from 'react'
 import classes from './Layout.module.scss'
 import Menu from './Menu/Menu'
 import ChatList from './ChatList/ChatList'
 import SearchInput from '../UI/SearchInput/SearchInput'
 import Messages from './Messages/Messages'
 import bg from '../../assets/bg-messages.jpg'
-import users, {IUser} from '../../data/users'
-import chatList, {IChat} from '../../data/chatList'
-import {useNavigate, useParams} from 'react-router-dom'
-import {IMessage} from '../../data/messages'
+import { IChat } from '../../services/ApiService/Chat.service'
+import { useNavigate, useParams } from 'react-router-dom'
+import { IMessage, setMessage } from '../../services/ApiService/Message.service'
 import { checkChat } from '../../services/ApiService/Chat.service'
-import {IDataChat} from '../../data/chatList'
 import { getChatList } from '../../services/ApiService/Chat.service'
+import { getMessage } from '../../services/ApiService/Message.service'
+import { UserContext } from '../../App'
 
 //contexts
-export const UserContext = createContext({} as IUser)
 export const ChatContext = createContext<IChat | undefined>({} as IChat)
+export const MessagesContext = createContext<IMessage[] | []>([] as IMessage[])
 
 function Layout() {
   //Hook
@@ -25,13 +25,16 @@ function Layout() {
   // const [chats, setChats] = useState<IDataChat[]>([])
   const [chats, setChats] = useState<any>([])
   const {chatRoute} = useParams<string>()
+  const user = useContext(UserContext)
   const navigate = useNavigate()
   const currentChat: IChat | undefined = chats.find((chat: any) => chat.address === chatRoute)
   //Hook
   //effects
   useEffect(() => {
     (async function () {
-      const chats = await getChatList('1')
+      const chats = await getChatList(user.id)
+      const messages = await getMessage('1')
+      setChatMessages(messages)
       setChats(chats)
     })()
   }, [chatMessages])
@@ -49,9 +52,8 @@ function Layout() {
 
   return (
     <div className={classes.Layout}>
-      {/*<ModalContact />*/}
-      <UserContext.Provider value={users[0]}>
-        <ChatContext.Provider value={currentChat}>
+      <ChatContext.Provider value={currentChat}>
+        <MessagesContext.Provider value={chatMessages}>
           <div className={classes.Left}>
             <Menu/>
             <div className={classes.ChatAndSearch}>
@@ -66,14 +68,14 @@ function Layout() {
               />
             </div>
           </div>
-          <div className={classes.Right} style={{backgroundImage: `url('${bg}')`}}>
-            <Messages
-              chatMessages={chatMessages}
-              setChatMessages={setChatMessages}
-            />
-          </div>
-        </ChatContext.Provider>
-      </UserContext.Provider>
+          {/*<div className={classes.Right} style={{backgroundImage: `url('${bg}')`}}>*/}
+          {/*  <Messages*/}
+          {/*    chatMessages={chatMessages}*/}
+          {/*    setChatMessages={setChatMessages}*/}
+          {/*  />*/}
+          {/*</div>*/}
+        </MessagesContext.Provider>
+      </ChatContext.Provider>
     </div>
   )
 }
