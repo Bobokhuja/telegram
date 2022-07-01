@@ -9,9 +9,9 @@ export const messageRoute = {
   },
   setMessage(req, res) {
     // if(!req.body) return res.sendStatus(400);
-    setMessage(req.body, req.params.id)
+    const newMessage = setMessage(req.body, req.params.id)
     console.log(req.body)
-    res.send(messages)
+    res.send(newMessage)
   },
   getLastMessage(req, res) {
     const lastMessage = messages

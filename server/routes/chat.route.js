@@ -13,7 +13,10 @@ export const chatRoute = {
             if (a.date < b.date) return -1
           })
           .pop()
-        lastMessage.sender = users.find(user => lastMessage.senderId === user.id)
+        if (lastMessage) {
+          lastMessage.sender = users.find(user => lastMessage.senderId === user.id)
+          if (lastMessage.sender.id === req.query.id) lastMessage.sender.name = 'You'
+        }
         return {
           id: chat.id,
           participant: user,
@@ -26,29 +29,4 @@ export const chatRoute = {
     const chat = chatList.find(chat => chat.id === req.params.id)
     res.send(chat)
   },
-  getNewDateChats(req, res) {
-    const dataChats = chatList.map(chat => {
-      let lastMessage = messages
-        .filter(message => message.chatId === req.params.id)
-        .sort((a, b) => {
-          if (a.date > b.date) return -1
-        })
-        .pop()
-      let date = ''
-      let text = 'no messages'
-      let sender = users.find(user => user.id === lastMessage.userId)
-
-      return {
-        id: req.params.id,
-        title: chat.name,
-        text,
-        sender: sender && sender.name,
-        address: chat.chatName,
-        date
-      }
-    })
-
-    res.send(dataChats)
-
-  }
 }

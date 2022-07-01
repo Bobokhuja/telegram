@@ -70,11 +70,18 @@ export const messages = [
     date: new Date(2022, 5, 29, 0, 2, 0, 0)
   },
   {
-    id: '3',
+    id: '4',
     chatId: '1',
     senderId: '2',
     message: 'Соз рахмат!',
     date: new Date(2022, 5, 29, 0, 3, 0, 0)
+  },
+  {
+    id: '5',
+    chatId: '2',
+    senderId: '4',
+    message: 'Але чокди',
+    date: new Date(2022, 5, 30, 17, 45, 23, 804)
   }
 ]
 
@@ -85,11 +92,13 @@ function nextMessageId(messages) {
 }
 
 export function setMessage(message, chatId) {
-  messages.push({
+  const newMessage = {
     id: nextMessageId(messages),
     chatId,
-    ...message
-  })
+    ...message,
+  }
+  messages.push(newMessage)
+  return newMessage
 }
 
 app.listen(port, () => {
