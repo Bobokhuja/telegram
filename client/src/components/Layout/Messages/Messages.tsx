@@ -1,14 +1,15 @@
-import React, {ChangeEvent, ChangeEventHandler, useContext, useEffect, useRef, useState} from 'react'
+import React, { ChangeEvent, ChangeEventHandler, useContext, useEffect, useRef, useState } from 'react'
 import classes from './Messages.module.scss'
 import HeaderMessages from './HeaderMessages/HeaderMessages'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import InputChat from './InputChat/InputChat'
 import MessageContainer from './MessageContainer/MessageContainer'
-import { getMessage, IMessage } from '../../../services/ApiService/Message.service'
-import {UserContext } from '../../../App'
-import {ChatContext} from '../Layout'
-import {checkChat} from '../../../services/ApiService/Chat.service'
-import {getDraft, removeDraft, setDraft} from '../../../utils/draft'
+import { getMessage, IMessage, setMessage } from '../../../services/ApiService/Message.service'
+import { UserContext } from '../../../App'
+// import { ChatContext } from '../Layout'
+import { ChatContext } from '../../../App'
+import { checkChat } from '../../../services/ApiService/Chat.service'
+import { getDraft, removeDraft, setDraft } from '../../../utils/draft'
 
 type IMessagesComponent = {
   chatMessages: IMessage[]
@@ -22,27 +23,28 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
   const [textMessage, setTextMessage] = useState<string>('')
 
   //Other Hooks
-  const divRef = useRef(null)
+  const divRef = useRef<any>(null)
   const {chatRoute} = useParams()
   const user: any = useContext(UserContext)
-  const currentChat: any = useContext(ChatContext)
+  const chat: any = useContext(ChatContext)
 
   useEffect(() => {
-    checkChat('1', chatRoute)
+    checkChat(user.id, chatRoute)
       .then(res => {
         if (res) {
-          setTitle(currentChat.name)
-          setTextMessage(getDraft(currentChat.id))
+          setTitle(chat.participant.name)
+          // setTextMessage(getDraft(currentChat.id))
         }
       })
-  }, [chatRoute])
+  }, [chat])
 
   useEffect(() => {
+
     checkChat('1', chatRoute)
       .then(res => {
         if (res) {
-          const currentMessages = getMessage(currentChat!.id)
-          setChatMessages(currentMessages)
+          // const currentMessages = getMessage(currentChat!.id)
+          // setChatMessages(currentMessages)
         }
       })
   }, [chatRoute])
@@ -53,19 +55,22 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
     // setDraft(currentChat.id, event.target.value)
   }
 
-  const onSendMessageHandler: any = (text: string) => () => {
+  const onSendMessageHandler: any = (text: string) => async () => {
     if (!textMessage.trim()) return false
-    // const currentChat = chatList.find((chatItem) => chatItem.chatName === chatRoute)
-    // messages.setMessage({
-    //   chatId: currentChat!.id,
-    //   userId: user.id,
-    //   message: text,
-    //   date: new Date()
-    // })
-    // const newMessages = messages.getMessage(currentChat!.id)
-    // setChatMessages(newMessages)
+
+    const newMessage = await setMessage(chat.id, {
+      senderId: user.id,
+      message: text,
+      date: new Date()
+    })
+    setChatMessages((prevState: any) => {
+      return [
+        ...prevState,
+        newMessage
+      ]
+    })
     setTextMessage('')
-    removeDraft(currentChat!.id)
+    removeDraft(chat.id)
   }
 
   const onKeyPressHandler = (event: any) => {
@@ -87,7 +92,7 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
                 title={title}
                 chatinfo="online"
               />
-              <MessageContainer divRef={divRef} stateMessages={chatMessages} />
+              <MessageContainer divRef={divRef} stateMessages={chatMessages}/>
               <InputChat
                 onSendMessageHandler={onSendMessageHandler}
                 textMessage={textMessage}

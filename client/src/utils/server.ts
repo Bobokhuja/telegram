@@ -1,1 +1,2 @@
-export const serverIp: string = 'http://192.168.4.151:8080'
+// export const serverIp: string = 'http://192.168.4.151:8080'
+export const serverIp: string = 'http://192.168.0.100:8080'

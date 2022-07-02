@@ -10,11 +10,23 @@ export type IChat = {
 
 export type IChatForChatList = {
   id: string
-  chatName: string
-  name: string
-  lastMessageDate?: Date
-  lastTextMessage?: string
-  lastTextSender?: string
+  participant: {
+    id: string
+    username: string
+    name: string
+  },
+  lastMessage?: {
+    id: string
+    chatId: string
+    senderId: string
+    message: string
+    date: string,
+    sender: {
+      id: string,
+      username: string,
+      name: string
+    }
+  }
 }
 
 export function getFormatDate(date: Date, type: string = 'time') {
@@ -27,6 +39,13 @@ export async function getChatList(userId: string): Promise<IChatForChatList[]> {
   return await response.json()
 }
 
+export async function getChatByUsername(userId: string, chatRoute: string | undefined): Promise<IChatForChatList | undefined> {
+  if (!chatRoute) return undefined
+  const response = await fetch(`${serverIp}/chat?id=${userId}&format=data-chats`)
+  const chats = await response.json()
+  return chats.find((chat: IChatForChatList) => chat.participant.username === chatRoute)
+}
+
 export async function checkChat(userId: string, chatName: string | undefined): Promise<boolean> {
-  return (await getChatList(userId)).some(chat => chat.chatName === chatName)
+  return (await getChatList(userId)).some(chat => chat.participant.username === chatName)
 }

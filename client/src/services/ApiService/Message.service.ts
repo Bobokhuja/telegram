@@ -16,9 +16,12 @@ export async function getMessage(chatId: string): Promise<IMessage[]> {
   const response = await fetch(`${serverIp}/messages/${chatId}`)
   return response.json()
 }
-export async function setMessage(chatId: string, message: IMessage) {
+export async function setMessage(chatId: string, message: any) {
   const response = await fetch(`${serverIp}/messages/${chatId}`, {
     method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify(message)
   })
   return response.json()

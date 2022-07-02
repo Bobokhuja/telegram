@@ -7,9 +7,7 @@ import { UserContext } from '../../../../App'
 function MessageContainer({stateMessages, divRef}: any) {
   const user = useContext<IUser>(UserContext)
 
-  console.log(stateMessages)
   useEffect(() => {
-    // @ts-ignore
     divRef.current!.scrollTop = divRef.current!.scrollHeight + divRef.current!.scrollHeight
   }, [stateMessages])
 
@@ -23,7 +21,7 @@ function MessageContainer({stateMessages, divRef}: any) {
               <Message
                 key={message.id}
                 message={message.message}
-                isYour={user.id === message.userId}
+                isYour={user.id === message.senderId}
                 date={date.toLocaleTimeString().slice(0, -3)}
               />
             )

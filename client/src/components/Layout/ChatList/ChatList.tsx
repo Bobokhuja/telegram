@@ -12,16 +12,8 @@ type IChat = {
   sender: string
 }
 
-type IChatList = {
-  dataChats: any
-}
-
-function ChatList({dataChats}: IChatList) {
+function ChatList() {
   const chats = useContext(ChatsContext)
-
-  // useEffect(() => {
-  //   console.log(chats)
-  // }, [chats])
   return (
     <div className={classes.ChatList}>
       <div className={classes.Wrapper}>
@@ -30,10 +22,10 @@ function ChatList({dataChats}: IChatList) {
               <ChatItem
                 key={chat.id}
                 title={chat.participant.name}
-                text={chat.lastMessage && chat.lastMessage.message}
+                text={chat.lastMessage && chat.lastMessage.message || 'no messages'}
                 date={chat.lastMessage && chat.lastMessage.date}
                 address={chat.participant.username}
-                sender={chat.lastMessage && chat.lastMessage.date}
+                sender={chat.lastMessage && chat.lastMessage.sender.name}
               />
             )
           )
