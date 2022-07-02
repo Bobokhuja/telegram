@@ -8,7 +8,8 @@ function MessageContainer({stateMessages, divRef}: any) {
   const user = useContext<IUser>(UserContext)
 
   useEffect(() => {
-    divRef.current!.scrollTop = divRef.current!.scrollHeight + divRef.current!.scrollHeight
+    divRef.current.scrollTop = divRef.current!.scrollHeight + divRef.current!.scrollHeight
+    // console.log(stateMessages)
   }, [stateMessages])
 
   return (

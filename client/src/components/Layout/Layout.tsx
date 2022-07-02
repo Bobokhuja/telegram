@@ -7,9 +7,7 @@ import Messages from './Messages/Messages'
 import bg from '../../assets/bg-messages.jpg'
 import { getChatByUsername, IChat, IChatForChatList } from '../../services/ApiService/Chat.service'
 import { useNavigate, useParams } from 'react-router-dom'
-import { IMessage, setMessage } from '../../services/ApiService/Message.service'
 import { checkChat } from '../../services/ApiService/Chat.service'
-import { getChatList } from '../../services/ApiService/Chat.service'
 import { getMessage } from '../../services/ApiService/Message.service'
 import { ChatContext, ChatsContext, MessagesContext, UserContext } from '../../App'
 
@@ -31,37 +29,27 @@ function Layout() {
   const [currentChat, setCurrentChat] = useState<any>({} as IChatForChatList)
   //Hook
   //effects
-  // useEffect(() => {
-  //   (async function () {
-  //     if (currentChat) {
-  //       const messages = await getMessage(currentChat.id)
-  //       setChatMessages(messages)
-  //     }
-  //   })()
-  // }, [currentChat])
 
   useEffect(() => {
-    checkChat('1', chatRoute)
-      .then(res => {
-        if (!res) navigate('/')
-      })
-
+    if (user.id) {
+      checkChat(user.id, chatRoute)
+        .then(res => {
+          if (!res) navigate('/')
+        })
+    }
   }, [chatRoute, chats])
-
-  // useEffect(() => {
-  //   const currentChat = chats.find((chat: IChatForChatList) => chat.participant.username === chatRoute)
-  //   setCurrentChat(currentChat)
-  // }, [chats, chatRoute])
 
   useEffect(() => {
     (async function () {
       if (currentChat) {
         const messages = await getMessage(currentChat.id)
+        // console.log(messages)
         setChatMessages(messages)
       }
     })()
-  }, [currentChat, chats])
-  console.log(chatMessages)
+  }, [currentChat])
+
+  // console.info(1)
 
   useEffect(() => {
     const currentChat = chats.find((chat: IChatForChatList) => chat.participant.username === chatRoute)

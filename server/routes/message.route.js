@@ -7,10 +7,10 @@ export const messageRoute = {
   getMessage(req, res) {
     res.send(messages.filter(message => message.chatId === req.params.id))
   },
-  setMessage(req, res) {
+  async setMessage(req, res) {
     // if(!req.body) return res.sendStatus(400);
-    const newMessage = setMessage(req.body, req.params.id)
-    console.log(req.body)
+    const newMessage = await setMessage(req.body, req.params.id)
+    console.log(newMessage)
     res.send(newMessage)
   },
   getLastMessage(req, res) {

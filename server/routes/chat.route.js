@@ -15,7 +15,6 @@ export const chatRoute = {
           .pop()
         if (lastMessage) {
           lastMessage.sender = users.find(user => lastMessage.senderId === user.id)
-          if (lastMessage.sender.id === req.query.id) lastMessage.sender.name = 'You'
         }
         return {
           id: chat.id,

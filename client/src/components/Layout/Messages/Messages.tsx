@@ -6,7 +6,6 @@ import InputChat from './InputChat/InputChat'
 import MessageContainer from './MessageContainer/MessageContainer'
 import { getMessage, IMessage, setMessage } from '../../../services/ApiService/Message.service'
 import { UserContext } from '../../../App'
-// import { ChatContext } from '../Layout'
 import { ChatContext } from '../../../App'
 import { checkChat } from '../../../services/ApiService/Chat.service'
 import { getDraft, removeDraft, setDraft } from '../../../utils/draft'
@@ -29,25 +28,16 @@ function Messages({chatMessages, setChatMessages}: IMessagesComponent) {
   const chat: any = useContext(ChatContext)
 
   useEffect(() => {
-    checkChat(user.id, chatRoute)
-      .then(res => {
-        if (res) {
-          setTitle(chat.participant.name)
-          // setTextMessage(getDraft(currentChat.id))
-        }
-      })
+    if (user.id) {
+      checkChat(user.id, chatRoute)
+        .then(res => {
+          if (res) {
+            setTitle(chat.participant.name)
+            // setTextMessage(getDraft(currentChat.id))
+          }
+        })
+    }
   }, [chat])
-
-  useEffect(() => {
-
-    checkChat('1', chatRoute)
-      .then(res => {
-        if (res) {
-          // const currentMessages = getMessage(currentChat!.id)
-          // setChatMessages(currentMessages)
-        }
-      })
-  }, [chatRoute])
 
   // Handlers
   const onChangeInput: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {

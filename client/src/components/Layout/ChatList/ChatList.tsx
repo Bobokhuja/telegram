@@ -14,6 +14,7 @@ type IChat = {
 
 function ChatList() {
   const chats = useContext(ChatsContext)
+  // console.log(chats)
   return (
     <div className={classes.ChatList}>
       <div className={classes.Wrapper}>
@@ -25,7 +26,7 @@ function ChatList() {
                 text={chat.lastMessage && chat.lastMessage.message || 'no messages'}
                 date={chat.lastMessage && chat.lastMessage.date}
                 address={chat.participant.username}
-                sender={chat.lastMessage && chat.lastMessage.sender.name}
+                sender={chat.lastMessage.sender && chat.lastMessage.sender.name}
               />
             )
           )

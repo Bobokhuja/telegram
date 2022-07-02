@@ -47,5 +47,6 @@ export async function getChatByUsername(userId: string, chatRoute: string | unde
 }
 
 export async function checkChat(userId: string, chatName: string | undefined): Promise<boolean> {
+  console.log(userId)
   return (await getChatList(userId)).some(chat => chat.participant.username === chatName)
 }

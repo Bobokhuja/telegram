@@ -1,0 +1,64 @@
+[
+  {
+    "id": "1",
+    "chatId": "3",
+    "senderId": "3",
+    "message": "Hello I'm dexter",
+    "date": "2022-07-02T06:41:49.339Z",
+    "sender": {
+      "id": "3",
+      "username": "dexter",
+      "name": "Dexter Morgan"
+    }
+  },
+  {
+    "id": "2",
+    "chatId": "1",
+    "senderId": "1",
+    "message": "Hello my name is Bobokhuja",
+    "date": "2022-07-02T06:42:17.959Z",
+    "sender": {
+      "id": "1",
+      "username": "bobokhuja",
+      "name": "Abdulloev Abdurahmon"
+    }
+  },
+  {
+    "id": "3",
+    "chatId": "2",
+    "senderId": "1",
+    "message": "My name is Bobokhuja hey Shodmon",
+    "date": "2022-07-02T06:42:31.329Z",
+    "sender": {
+      "id": "1",
+      "username": "bobokhuja",
+      "name": "Abdulloev Abdurahmon"
+    }
+  },
+  {
+    "id": "4",
+    "chatId": "2",
+    "senderId": "4",
+    "message": "Абача чокди",
+    "date": "2022-07-02T06:43:07.654Z"
+  },
+  {
+    "id": "5",
+    "chatId": "2",
+    "senderId": "4",
+    "message": "Кчода мегарди",
+    "date": "2022-07-02T06:43:12.967Z",
+    "sender": {
+      "id": "4",
+      "username": "shodmon",
+      "name": "Nakimov Shodmon"
+    }
+  },
+  {
+    "id": "6",
+    "chatId": "1",
+    "senderId": "2",
+    "message": "Бамада чи",
+    "date": "2022-07-02T06:43:43.446Z"
+  }
+]
