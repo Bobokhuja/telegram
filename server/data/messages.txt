@@ -59,6 +59,96 @@
     "chatId": "1",
     "senderId": "2",
     "message": "Бамада чи",
-    "date": "2022-07-02T06:43:43.446Z"
+    "date": "2022-07-02T06:43:43.446Z",
+    "sender": {
+      "id": "2",
+      "username": "burhon",
+      "name": "Abdulloev Burhon"
+    }
+  },
+  {
+    "id": "7",
+    "chatId": "1",
+    "senderId": "1",
+    "message": "Ба тда чи?",
+    "date": "2022-07-02T08:40:58.649Z"
+  },
+  {
+    "id": "8",
+    "chatId": "1",
+    "senderId": "1",
+    "message": "Hello",
+    "date": "2022-07-02T08:41:01.907Z"
+  },
+  {
+    "id": "9",
+    "chatId": "1",
+    "senderId": "1",
+    "message": "sdf",
+    "date": "2022-07-02T08:41:02.795Z",
+    "sender": {
+      "id": "1",
+      "username": "bobokhuja",
+      "name": "Abdulloev Abdurahmon"
+    }
+  },
+  {
+    "id": "10",
+    "chatId": "1",
+    "senderId": "1",
+    "message": "d",
+    "date": "2022-07-02T08:41:36.591Z",
+    "sender": {
+      "id": "1",
+      "username": "bobokhuja",
+      "name": "Abdulloev Abdurahmon"
+    }
+  },
+  {
+    "id": "11",
+    "chatId": "1",
+    "senderId": "1",
+    "message": "asdfsdf",
+    "date": "2022-07-02T08:46:50.445Z"
+  },
+  {
+    "id": "12",
+    "chatId": "1",
+    "senderId": "1",
+    "message": "fdsa",
+    "date": "2022-07-02T08:46:51.597Z"
+  },
+  {
+    "id": "13",
+    "chatId": "1",
+    "senderId": "1",
+    "message": "asdf",
+    "date": "2022-07-02T08:46:52.333Z",
+    "sender": {
+      "id": "1",
+      "username": "bobokhuja",
+      "name": "Abdulloev Abdurahmon"
+    }
+  },
+  {
+    "id": "14",
+    "chatId": "2",
+    "senderId": "1",
+    "message": "Hekkio",
+    "date": "2022-07-02T09:02:55.386Z"
+  },
+  {
+    "id": "15",
+    "chatId": "2",
+    "senderId": "1",
+    "message": "How are you",
+    "date": "2022-07-02T09:02:58.802Z"
+  },
+  {
+    "id": "16",
+    "chatId": "2",
+    "senderId": "1",
+    "message": "You is amazing",
+    "date": "2022-07-02T09:03:03.458Z"
   }
 ]

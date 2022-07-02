@@ -5,23 +5,40 @@
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
   display: flex;
+  
+  @media (max-width: 680px) {
+    flex-direction: column;
+  }
 }
 
 .Left {
   height: 100%;
   display: flex;
   justify-content: start;
+  flex-grow: 1;
+
+  @media (max-width: 860px) {
+    flex-grow: 0;
+    height: auto;
+  }
 }
 
 .ChatAndSearch {
   background: #fff;
-  width: 600px;
+  width: auto;
+  //max-width: 600px;
+  min-width: 350px;
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   border-right: 1px solid #707579;
+
+  @media (max-width: 860px) {
+    display: none;
+  }
 }
 
 .Right {
-  flex-grow: 1;
+  flex-grow: 2;
   background-size: cover;
 }

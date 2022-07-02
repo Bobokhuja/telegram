@@ -39,7 +39,7 @@ function Menu() {
             </MenuButton>
           </li>
           <li>
-            <MenuButton text="Add chatRoute">
+            <MenuButton text="Add chat">
               <span className={cls.join(' ')}>contacts</span>
             </MenuButton>
           </li>
