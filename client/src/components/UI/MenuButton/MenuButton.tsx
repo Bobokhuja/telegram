@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react'
+import React, { ReactNode } from 'react'
 import classes from './MenuButton.module.scss'
 
 type IMenuButton = {
@@ -7,7 +7,7 @@ type IMenuButton = {
   children: ReactNode
 }
 
-function MenuButton({text, children}: IMenuButton) {
+export default function MenuButton({text, children}: IMenuButton) {
 
   return (
     <button className={classes.MenuButton}>
@@ -16,5 +16,3 @@ function MenuButton({text, children}: IMenuButton) {
     </button>
   )
 }
-
-export default MenuButton

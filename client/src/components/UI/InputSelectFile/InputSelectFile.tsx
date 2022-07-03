@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './InputSelectFile.module.scss'
 
-function InputSelectFile() {
+export default function InputSelectFile() {
 
   return (
     <div className={classes.InputSelectFile}>
@@ -14,5 +14,3 @@ function InputSelectFile() {
     </div>
   )
 }
-
-export default InputSelectFile

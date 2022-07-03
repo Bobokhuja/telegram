@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler} from 'react'
+import React, { ChangeEventHandler } from 'react'
 import classes from './SeatchInput.module.scss'
 
 type IInput = {
@@ -7,24 +7,20 @@ type IInput = {
   value?: string
   onChange?: ChangeEventHandler
   placeholder?: string
-
 }
 
-function SearchInput({type, value, label = '', placeholder = '', onChange}: IInput) {
-  const htmlFor: string = 'searchInput'
+export default function SearchInput({type, value, label = '', placeholder = '', onChange}: IInput) {
 
   return (
     <div className={classes.SearchInput}>
-      <label htmlFor={htmlFor}>{label}</label>
+      <label htmlFor={'searchInput'}>{label}</label>
       <input
         type={type}
         value={value}
-        id={htmlFor}
+        id={'searchInput'}
         placeholder={placeholder}
         onChange={onChange && onChange}
       />
     </div>
   )
 }
-
-export default SearchInput

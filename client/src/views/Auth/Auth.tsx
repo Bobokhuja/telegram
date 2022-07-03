@@ -1,8 +1,6 @@
 import React from 'react'
 
-function Auth() {
+export default function Auth() {
 
   return <div>Auth</div>
 }
-
-export default Auth

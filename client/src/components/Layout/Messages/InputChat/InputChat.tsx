@@ -3,15 +3,21 @@ import classes from './InputChat.module.scss'
 import InputMessage from '../../../UI/InputMessage/InputMessage'
 import InputSelectFile from '../../../UI/InputSelectFile/InputSelectFile'
 
-
-interface IInputChat {
+type IInputChat = {
   onSendMessageHandler: any
   textMessage: string
   onChangeInput: any
   onKeyPressHandler: any
+  inputRef: any
 }
 
-function InputChat({onSendMessageHandler, textMessage, onChangeInput, onKeyPressHandler}: IInputChat) {
+export default function InputChat({
+                     onSendMessageHandler,
+                     textMessage,
+                     onChangeInput,
+                     onKeyPressHandler,
+                     inputRef
+                   }: IInputChat) {
 
   return (
     <div className={classes.InputChat}>
@@ -19,6 +25,7 @@ function InputChat({onSendMessageHandler, textMessage, onChangeInput, onKeyPress
 
       />
       <InputMessage
+        inputRef={inputRef}
         value={textMessage}
         onChange={onChangeInput}
         customClass={classes.InputText}
@@ -38,5 +45,3 @@ function InputChat({onSendMessageHandler, textMessage, onChangeInput, onKeyPress
     </div>
   )
 }
-
-export default InputChat

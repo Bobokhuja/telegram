@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './ModalContact.module.scss'
 
-function ModalContact() {
+export default function ModalContact() {
 
   return (
     <div className={classes.ModalContact}>
@@ -9,5 +9,3 @@ function ModalContact() {
     </div>
   )
 }
-
-export default ModalContact

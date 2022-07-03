@@ -1,7 +1,5 @@
 .Layout {
   height: 100vh;
-  //background: rgb(49,43,150);
-  //background: linear-gradient(90deg, rgba(49,43,150,1) 0%, rgba(52,52,166,1) 35%, rgba(0,212,255,1) 100%);
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
   display: flex;
@@ -25,9 +23,8 @@
 
 .ChatAndSearch {
   background: #fff;
-  width: auto;
-  //max-width: 600px;
-  min-width: 350px;
+  max-width: 600px;
+  min-width: 400px;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -39,6 +36,11 @@
 }
 
 .Right {
-  flex-grow: 2;
+  flex-grow: 1;
+  width: 100%;
   background-size: cover;
+  
+  @media (max-width: 860px) {
+
+  }
 }

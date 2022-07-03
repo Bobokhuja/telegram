@@ -1,5 +1,5 @@
-import React, {MouseEventHandler} from 'react'
-import {Link, useParams} from 'react-router-dom'
+import React from 'react'
+import { Link, useParams } from 'react-router-dom'
 import classes from './ChatItem.module.scss'
 import reactIcon from '../../../../assets/logo-og.png'
 
@@ -12,18 +12,18 @@ interface IChatItem {
   onClick?: any
 }
 
-function ChatItem({title, text, date, sender, onClick, address}: IChatItem) {
-
-  const cls: string[] = [classes.ChatItem]
-
+export default function ChatItem({title, text, date, sender, onClick, address}: IChatItem) {
   const {chatRoute} = useParams()
-  if (chatRoute === address) cls.push(classes.Active)
+  const cls: string[] = [
+    classes.ChatItem,
+    chatRoute === address ? classes.Active : ''
+  ]
 
   return (
     <Link to={`/${address}`}>
       <div className={cls.join(' ')} onClick={onClick}>
         <div className={classes.ChatLeft}>
-          <img className={classes.ChatImg} src={reactIcon} alt="" />
+          <img className={classes.ChatImg} src={reactIcon} alt=""/>
         </div>
         <div className={classes.ChatCenter}>
           <p className={classes.Title}>{title}</p>
@@ -40,5 +40,3 @@ function ChatItem({title, text, date, sender, onClick, address}: IChatItem) {
     </Link>
   )
 }
-
-export default ChatItem

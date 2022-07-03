@@ -8,6 +8,7 @@
   @media (max-width: 680px) {
     flex-direction: row;
     width: 100%;
+    display: none;
   }
 }
 
@@ -32,10 +33,4 @@
     width: 100%;
     flex-grow: 1;
   }
-}
-
-.Icon {
-  font-size: 25px;
-  color: #8393a3;
-  //text-align: center;
 }
