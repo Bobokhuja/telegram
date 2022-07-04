@@ -32,6 +32,7 @@ export default function InputMessage({
         onChange={onChange}
         id={htmlFor}
         onKeyUp={onKeyPressHandler}
+        autoComplete="off"
       />
       <label htmlFor={htmlFor}>Write a message</label>
     </div>
