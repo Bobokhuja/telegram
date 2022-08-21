@@ -10,6 +10,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { checkChat } from '../../services/ApiService/Chat.service'
 import { getMessage } from '../../services/ApiService/Message.service'
 import { ChatsContext, MessagesContext, UserContext } from '../../App'
+import ModalContactsProvider from '../ModalContacts/ModalContactsProvider'
+import ModalContacts from '../ModalContacts/ModalContacts'
 
 export const ChatContext = createContext<IChatForChatList | undefined>({} as IChatForChatList)
 
@@ -39,6 +41,7 @@ export default function Layout() {
         .then(messages => setChatMessages(messages))
     }
   }, [currentChat])
+  console.log(currentChat)
 
   useEffect(() => {
     const currentChat = chats.find((chat: IChatForChatList) => chat.participant.username === chatRoute)
@@ -51,6 +54,7 @@ export default function Layout() {
 
   return (
     <div className={classes.Layout}>
+      <ModalContacts />
       <ChatContext.Provider value={currentChat}>
         <div className={classes.Left}>
           <Menu/>

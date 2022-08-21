@@ -11,6 +11,7 @@ router.use(express.json({
 
 router.route('/users').get(userRoute.getUsers)
 router.route('/users/:id').get(userRoute.getUserById)
+router.route('/users/contacts/:id').get(userRoute.getUserContacts)
 router.route('/chat/').get(chatRoute.getChatList)
 router.route('/chat/:id').get(chatRoute.getChat)
 router.route('/messages').get(messageRoute.getMessages)

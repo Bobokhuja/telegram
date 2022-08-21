@@ -1,4 +1,4 @@
-import { users } from '../index.js'
+import { contacts, users } from '../index.js'
 
 export const userRoute = {
   getUsers(req, res) {
@@ -10,6 +10,11 @@ export const userRoute = {
     const user = users.find(user => user.id === req.params.id)
     res.send(user)
   },
-  getUserByUsername(req, res) {
+  getUserContacts(req, res) {
+    const userContacts = contacts.filter(({user}) => user === req.params.id)
+      .map(({user, addedContact}) => {
+        return users.find(({id}) => id === addedContact)
+      })
+    res.send(userContacts)
   }
 }

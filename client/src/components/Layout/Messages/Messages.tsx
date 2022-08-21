@@ -27,6 +27,8 @@ export default function Messages({chatMessages, setChatMessages}: IMessagesCompo
   const user: any = useContext(UserContext)
   const chat: any = useContext(ChatContext)
 
+  // console.log('Messages', chatMessages[chatMessages.length - 1])
+
   useEffect(() => {
     if (!user.id) return
     checkChat(user.id, chatRoute)

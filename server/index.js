@@ -3,7 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import { router } from './routes/routes.js'
 import { access, writeFile, readFile } from 'fs/promises'
-import * as constants from 'constants'
+import mysql from 'mysql'
 
 export const app = express()
 app.use(cors())
@@ -13,43 +13,15 @@ app.use(express.json({
 }))
 const port = 8080
 
-// export let messages = [
-//   {
-//     id: '1',
-//     chatId: '1',
-//     senderId: '1',
-//     message: 'Салом',
-//     date: new Date(2022, 5, 29, 0, 0, 0, 0)
-//   },
-//   {
-//     id: '2',
-//     chatId: '1',
-//     senderId: '2',
-//     message: 'Воъалейкум салом',
-//     date: new Date(2022, 5, 29, 0, 1, 0, 0)
-//   },
-//   {
-//     id: '3',
-//     chatId: '1',
-//     senderId: '1',
-//     message: 'Саломатие чхе?',
-//     date: new Date(2022, 5, 29, 0, 2, 0, 0)
-//   },
-//   {
-//     id: '4',
-//     chatId: '1',
-//     senderId: '2',
-//     message: 'Соз рахмат!',
-//     date: new Date(2022, 5, 29, 0, 3, 0, 0)
-//   },
-//   {
-//     id: '5',
-//     chatId: '2',
-//     senderId: '4',
-//     message: 'Але чокди',
-//     date: new Date(2022, 5, 30, 17, 45, 23, 804)
-//   }
-// ]
+export const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '[$mysql~$]:{ABobokhuja#%2021%$}',
+  database: 'telegram'
+})
+
+// connection.connect();
+
 export let messages = []
 
 async function checkFile(chatId) {
@@ -78,22 +50,26 @@ export const users = [
   {
     id: '1',
     username: 'bobokhuja',
-    name: 'Abdulloev Abdurahmon'
+    name: 'Abdulloev Abdurahmon',
+    avatar: 'https://picsum.photos/50/50'
   },
   {
     id: '2',
     username: 'burhon',
-    name: 'Abdulloev Burhon'
+    name: 'Abdulloev Burhon',
+    avatar: 'https://picsum.photos/50/50'
   },
   {
     id: '3',
     username: 'dexter',
-    name: 'Dexter Morgan'
+    name: 'Dexter Morgan',
+    avatar: 'https://picsum.photos/50/50'
   },
   {
     id: '4',
     username: 'shodmon',
-    name: 'Nakimov Shodmon'
+    name: 'Nakimov Shodmon',
+    avatar: 'https://picsum.photos/50/50'
   },
 ]
 export const chatList = [
@@ -109,6 +85,16 @@ export const chatList = [
     id: '3',
     participantsId: ['2', '3']
   }
+]
+export const contacts = [
+  {
+    user: '1',
+    addedContact: '2'
+  },
+  {
+    user: '1',
+    addedContact: '4'
+  },
 ]
 
 function nextMessageId(messages) {
@@ -128,6 +114,16 @@ export async function setMessage(message, chatId) {
   return newMessage
 }
 
+
 app.listen(port, () => {
   console.log('Server starting in port', port)
 })
+
+// const end = connection.end(function(err){
+//   if(!err){
+//     console.log("Mysql connection is terminated.")
+//   }
+//   else{
+//     throw err;
+//   }
+// });
